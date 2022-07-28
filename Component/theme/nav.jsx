@@ -21,7 +21,7 @@ export default function Nav() {
     return (
         <nav className="R-m alignX-full alignY box p-4 sh pup ">
             <style jsx>{`
-                nav{ width: -webkit-fill-available; }
+
                 @media (min-width: 576px){
                     nav{ padding: 1em 4em }
                 }
@@ -55,18 +55,23 @@ function Menu() {
         { content: 'Home', href: '/' },
         { content: 'prodect', href: '/prodect' },
         { content: 'about', href: '/about' },
+        {
+            content: 'login', href: '/admin/login', className: 'sm-m-4 box alignX', style: {
+                border: '1px solid var(--color-Ui)', color: 'var(--color-Ui)', borderRadius: '10px', margin: '0 1rem', padding: '10px'
+            }
+        },
+        { content: 'signup', href: '/admin/signup', className: 'sm-m-4 btn' },
     ]
     return (
-        <div className=" menu box row sm-pup sm-col sm-top-7 sm-sh sm-none  alignY" >
+        <div className=" menu box row sm-pup sm-col sm-sh sm-none  alignY right-0" >
             {data.map(a => {
+                let { href, content, className } = a
                 return (
-                    <Link href={a.href} key={a.href} className="sm-m-4" style={{ padding: '0 10px ' }}>
-                        {a.content}
+                    <Link href={href} key={href} className={"sm-p-4 w-full " + (className ? className : '')} style={a?.style}  >
+                        {content}
                     </Link>
                 )
             })}
-            <Link href='/admin/login'>login</Link>
-            <Link href='/admin/signup' className='btn'>signup</Link>
         </div >
     )
 }
