@@ -28,7 +28,9 @@ export default function Nav() {
                 `}</style>
 
             {/* btn menu */}
-            <div className="sm-box none">
+            <div className="sm-box none" onClick={() => {
+                document.querySelector('.menu').classList.toggle('sm-none')
+            }}>
                 <MenuOutline title={'menu'} color={'#00000'} height="40px" width="40px" />
             </div>
             {/* logo */}
