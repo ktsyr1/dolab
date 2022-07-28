@@ -1,0 +1,117 @@
+/**
+ name: "ktyle",
+ theme: light
+ author: "Qotayba mohammad"
+ description: "ui kit for the website"
+ version: "2.0.0"
+ homepage: "https://qotayba.top/ktyle/"
+ license: "MIT"
+ repository: "https://github.com/ktsyr1/ktyle"
+ keywords:
+ - "ui kit"
+ - "website"
+ - "css"
+ - "sass"
+ - "scss"
+ - "bootstrap"  
+ - "responsive"  
+@import ./theme
+@mixin Sizes($tag,$name , $key  )
+    $size: (0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,25,30)
+    .#{$tag}#{$name}
+        #{$key}: 1rem
+        @each $n in $size
+            $n1: $n * 0.25
+            @if $n > 4
+                $n1: ($n - 4)*2
+            &-#{$n}
+                #{$key}: #{$n1 }rem
+            @if $key == margin   or $key == "padding"
+                &t-#{$n}
+                    #{$key}-top: #{$n1 }rem
+                &l-#{$n}
+                    #{$key}-left: #{$n1 }rem
+                &r-#{$n}
+                    #{$key}-right: #{$n1 }rem
+                &b-#{$n}
+                    #{$key}-bottom: #{$n1 }rem
+                &x-#{$n}
+                    #{$key}-left: #{$n1 }rem
+                    #{$key}-right: #{$n1 }rem
+                &y-#{$n}
+                    #{$key}-top: #{$n1 }rem
+                    #{$key}-bottom: #{$n1 }rem
+
+@mixin responsive($tag,$min,$max)
+    @media (min-width: $min) and (max-width: $max)
+        @include Sizes($tag , p, padding )
+        @include Sizes($tag , m, margin )
+        @include Sizes($tag , w, width )
+        @include Sizes($tag , h, height )
+        @include Sizes($tag , top, top )
+        @include Sizes($tag , right, right )
+        @include Sizes($tag , bottom, bottom )
+        @include Sizes($tag , left, left )
+        .#{$tag}Box
+            padding: 5px 10px
+        .#{$tag}box ,.#{$tag}Box
+            display: flex !important
+        .#{$tag}none
+            display: none !important
+        .#{$tag}col
+            flex-direction: column !important
+        .#{$tag}row
+            flex-direction: row
+        .#{$tag}grid
+            flex-wrap: wrap
+        .#{$tag}left
+            justify-content: flex-start
+            flex-direction: row
+            width: 100%
+        .#{$tag}alignY
+            align-items: center
+            &-start
+                align-items: start
+            &-end
+                align-items: end
+            &-full
+                justify-content: space-between
+        .#{$tag}alignX
+            justify-content: center
+            &-start
+                justify-content: start
+            &-end
+                justify-content: end
+            &-full
+                justify-content: space-between
+        .#{$tag}scroll
+            overflow: auto
+        .#{$tag}pup
+            position: fixed
+        .#{$tag}f
+            &-sm
+                font-size: small
+            &-md
+                font-size: medium
+            &-lg
+                font-size: larger
+            &-xl
+                font-size: x-large
+            &-xxl
+                font-size: xx-large
+
+        .#{$tag}ui
+            background-color: #fff
+            // background: linear-gradient(145deg, #e6e6e6, #ffffff)
+            border-radius: 10px
+            color: $colorUIX
+            padding: 10px
+            margin: 10px
+            @include sh()
+
+@include responsive('',0,999999px)
+@include responsive('sm-',0px ,576px)
+@include responsive('md-',576px ,768px)
+@include responsive('lg-',768px ,992px)
+@include responsive('xl-',992px ,1200px)
+@include responsive('xxl-',1200px ,999999px)

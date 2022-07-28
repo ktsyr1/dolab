@@ -1,0 +1,117 @@
+
+:root
+    --color-text: #ffffff
+    --color-Text: #f2f3f7
+    --color-ui: #c0e0ff
+    --color-Ui: #ffd133
+    --color-UI: #dcb42f
+    --color-dark: #2b373a
+    --color-Dark: #21282a
+    --color-err: #ff5959
+    --color-Err: #ff2b2b
+$colorBG: var(--color-text)
+$colorBGB: var(--color-Text)
+$colorUI: var(--color-Ui)
+$colorUIX: var(--color-UI)
+$colorUIM: var(--color-ui)
+$colorDark: var(--color-dark)
+$colorDarkX: var(--color-Dark)
+@font-face
+    font-family: uiplus
+    src: url(/fonts/fontplus.otf)
+
+@mixin sh()
+    box-shadow: 5px 5px 10px #ddd
+    // box-shadow: 5px 5px 10px #cfcfcf, -5px -5px 10px #ffffff
+    &:hover
+        box-shadow: 5px 5px 10px var(--color-ui)
+        // box-shadow: 0px 0px 0px #fff
+        transition: box-shadow .2s ease,border .2s ease
+        // border: 1px solid var(--color-Ui)
+.sh
+    @include sh()
+.btn ,.btn
+    color: #fff !important
+    // background-color: $colorUIX
+    background-image: linear-gradient(90deg, var(--color-Ui), var(--color-UI) )
+    // box-shadow: 5px 5px 10px #ddd
+    padding: 10px
+    text-align: center
+    border-radius: 10px
+    min-width: 40px
+    -webkit-user-select: none
+    -ms-user-select: none
+    cursor: pointer
+    &.diseble
+        color: $colorUIX
+        // background-color: $colorBG
+        background-image: none
+        ._ui
+            stroke: $colorBG
+            fill: $colorUIX
+        .ui
+            stroke: $colorUIX
+            fill: $colorBG
+
+    &:not(&.diseble) svg
+        ._ui
+            stroke: $colorUIX
+            fill: $colorBG
+        .ui
+            stroke: $colorBG
+            fill: $colorUIX
+    &.red
+        color: $colorBG
+        background-image: linear-gradient(90deg, var(--color-err), var(--color-Err))
+    &.w
+        width: 100%
+
+b
+    padding: 10px
+strong ,a
+    padding: 0 10px
+.icon > svg
+    width: 20px
+    height: 20px
+    padding-left: 10px
+.page
+    max-width: 500px
+    width: -webkit-fill-available
+.ui
+    background-color: #fff
+    background: linear-gradient(145deg, #e6e6e6, #ffffff)
+    border-radius: 10px
+    color: $colorUIX
+    padding: 10px
+    margin: 10px
+    @include sh()
+
+button
+    border: 0
+svg
+    ._ui
+        stroke: $colorUIX
+        fill: $colorBG
+    .ui
+        stroke: $colorBG
+        fill: $colorUIX
+.rtl
+    direction: rtl
+.ltr
+    direction: ltr
+
+.rest ,.R
+    padding: 0 !important
+    margin: 0 !important
+    &-m
+        margin: 0 !important
+    &-p
+        padding: 0 !important
+
+.none
+    display: none
+
+.display
+    display: flex !important
+.pup
+    position: fixed
