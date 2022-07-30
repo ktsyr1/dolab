@@ -4,10 +4,10 @@
 ## auth
 
 * login
-    * icon
+    - icon
 * **signup**
-    * icon
-    * validation
+    - icon
+    - validation
 * repassword
 * new password
 * profile
@@ -34,13 +34,19 @@
 * finsh
     - close
     - dane
+
 ## search
-- get
+
+* get
 
 ## Routes
+
 * /admin/repassword
 * /admin/signup
 * /prodacts
 * /about
 
-
+images
+formats png, jpg, gif, svg
+size 3mb
+توحيد قياسات الصور

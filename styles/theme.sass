@@ -1,12 +1,12 @@
 
 :root
-    --color-text: #ffffff
-    --color-Text: #f2f3f7
+    --color-text: #2b373a
+    --color-Text: #21282a
     --color-ui: #c0e0ff
     --color-Ui: #ffd133
     --color-UI: #dcb42f
-    --color-dark: #2b373a
-    --color-Dark: #21282a
+    --color-dark: #ffffff
+    --color-Dark: #f2f3f7
     --color-err: #ff5959
     --color-Err: #ff2b2b
 $colorBG: var(--color-text)
@@ -21,12 +21,12 @@ $colorDarkX: var(--color-Dark)
     src: url(/fonts/fontplus.otf)
 
 @mixin sh()
-    box-shadow: 5px 5px 10px #ddd
+    box-shadow: 5px 5px 5px rgb(0 0 0 / 10%)
     // box-shadow: 5px 5px 10px #cfcfcf, -5px -5px 10px #ffffff
-    &:hover
-        box-shadow: 5px 5px 10px var(--color-ui)
+    // &:hover
+        // box-shadow: 5px 5px 10px var(--color-ui)
         // box-shadow: 0px 0px 0px #fff
-        transition: box-shadow .2s ease,border .2s ease
+        // transition: box-shadow .2s ease,border .2s ease
         // border: 1px solid var(--color-Ui)
 .sh
     @include sh()
@@ -76,7 +76,7 @@ b
     max-width: 500px
     width: -webkit-fill-available
 .ui
-    background-color: #fff
+    background-color: var(--color-text)
     // background: linear-gradient(145deg, #e6e6e6, #ffffff)
     border-radius: 10px
     color: $colorDarkX

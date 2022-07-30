@@ -35,7 +35,7 @@ export default function Nav() {
             </div>
             {/* logo */}
             <Link href={'/'} >
-                <Image src={'/images/logo.png'} width={54} height={40} />
+                <Image src={'/images/logo.png'} width={54} height={40} style={{ filter: 'drop-shadow(1px 1px 1px #FFFfff99)' }} />
             </Link>
             {/* menu */}
             <Menu />
@@ -57,10 +57,16 @@ function Menu() {
         { content: 'about', href: '/about' },
         {
             content: 'login', href: '/admin/login', className: 'sm-m-4 box alignX', style: {
-                border: '1px solid var(--color-Ui)', color: 'var(--color-Ui)', borderRadius: '10px', margin: '0 1rem', padding: '10px'
+                border: '1px solid var(--color-Ui)',
+                color: 'var(--color-Ui)',
+                borderRadius: '10px',
+                margin: '0 1rem',
+                padding: '10px',
+                fontSize: 'larger',
+                fontWeight: 700
             }
         },
-        { content: 'signup', href: '/admin/signup', className: 'sm-m-4 btn' },
+        { content: 'signup', href: '/admin/signup', className: 'sm-m-4 btn', style: { fontSize: 'larger', fontWeight: 700 } },
     ]
     return (
         <div className=" menu box row sm-pup sm-col sm-sh sm-none  alignY right-0" >
