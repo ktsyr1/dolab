@@ -8,19 +8,19 @@
 * **signup**
     - icon
     - validation
-* repassword
+<!-- * repassword -->
 * new password
 * profile
     - update
     - view
 
 ## admin 
-
-    - dolabs
+ 
+    - tires
     - appointments
     - users
 
-## dolab
+## tires
 
 * add
 * remove
