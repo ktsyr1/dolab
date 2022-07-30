@@ -4,11 +4,14 @@
 ## auth
 
 * login
-* signup
+    * icon
+* **signup**
+    * icon
+    * validation
 * repassword
 * new password
 * profile
-    - update  
+    - update
     - view
 
 ## admin 
@@ -32,4 +35,12 @@
     - close
     - dane
 ## search
-    - get
+- get
+
+## Routes
+* /admin/repassword
+* /admin/signup
+* /prodacts
+* /about
+
+
