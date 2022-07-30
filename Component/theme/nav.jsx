@@ -66,7 +66,7 @@ function Menu() {
                 fontWeight: 700
             }
         },
-        { content: 'signup', href: '/admin/signup', className: 'sm-m-4 btn', style: { fontSize: 'larger', fontWeight: 700 } },
+        { content: 'signup', href: '/admin/signup', className: 'sm-m-4 btn' },
     ]
     return (
         <div className=" menu box row sm-pup sm-col sm-sh sm-none  alignY right-0" >

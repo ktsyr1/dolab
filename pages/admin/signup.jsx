@@ -27,7 +27,7 @@ export default function Signup() {
                 <Input type='password' name='password' title='password' onChange={ChangePass} />
                 <Input type='password' name='repassword' title='repassword' onChange={ChangePass} />
                 {/* <span style={{ color: 'red', padding: '10px' }}  >{alert}</span> */}
-                <button className="btn" style={{ fontSize: 'larger', fontWeight: 700 }}>Sign up</button>
+                <button className="btn" >Sign up</button>
             </div>
         </div >
     )

@@ -13,7 +13,7 @@ export default function Repassword() {
             <div className='box col ui w-full from'>
                 <h1 className="box alignX m-5" > {title} </h1>
                 <Input type='email' name='email' placeholder="username@mail.com" title='email' />
-                <button className="btn" style={{ fontSize: 'larger', fontWeight: 700 }}> {title}</button>
+                <button className="btn" > {title}</button>
             </div>
         </div >
     )

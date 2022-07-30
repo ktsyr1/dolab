@@ -13,7 +13,7 @@ export default function Login() {
                 <Input type='email' name='email' placeholder="username@mail.com" title='email' />
                 <Input type='password' name='password' title='password' />
                 <Link href={'/admin/repassword'} className='p' style={{ display: 'flex', justifyContent: 'flex-end' }} >Forgot Password ?</Link>
-                <button className="btn" style={{ fontSize: 'larger', fontWeight: 700 }}>login</button>
+                <button className="btn" >login</button>
             </from>
         </div >
     )

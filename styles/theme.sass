@@ -31,10 +31,7 @@ $colorDarkX: var(--color-Dark)
 .sh
     @include sh()
 .btn ,.btn
-    color: #fff !important
-    // background-color: $colorUIX
     background-image: linear-gradient(90deg, var(--color-Ui), var(--color-UI) )
-    // box-shadow: 5px 5px 10px #ddd
     padding: 10px
     text-align: center
     border-radius: 10px
@@ -42,6 +39,9 @@ $colorDarkX: var(--color-Dark)
     -webkit-user-select: none
     -ms-user-select: none
     cursor: pointer
+    font-size: larger
+    font-weight: 700
+    color: var(--color-text) !important
     &.diseble
         color: $colorUIX
         // background-color: $colorBG

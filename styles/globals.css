@@ -6,7 +6,10 @@ html,body,* {
   box-sizing: border-box;
   text-decoration: none;
   list-style-type: none;
-  font-family: 'Montserrat', sans-serif;}
+  font-family: 'Montserrat', sans-serif;
+  color: var(--color-dark);
+  background-color: var(--color-text);
+}
 
 a {
   color: inherit;
