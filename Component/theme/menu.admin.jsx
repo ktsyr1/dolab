@@ -3,11 +3,10 @@ import Link from "lib/link"
 export default function MenuAdmin() {
     return (
         <div className="box col ui R-p w-12">
-            <b className="  p"  >dashboard</b>
-
+            <b className=" b-r p"  >dashboard</b>
             {menu.map(a => {
                 return (
-                    <Link href={'/admin/' + a} className="ui p" >{a}</Link>
+                    <Link href={'/admin/' + a} className="ui p" key={a}>{a}</Link>
                 )
             })}
         </div>
@@ -16,5 +15,5 @@ export default function MenuAdmin() {
 
 
 let menu = [
-    'tires', 'appointments', 'users',
-]
+    'tires', 'appointments', 'users','menu','brinds'
+] 
