@@ -1,13 +1,4 @@
 # tasks 
-* add font
-
-## auth
-
- 
-* newpassword
-* profile
-    - update
-    - view
 
 ## admin  
 
@@ -22,6 +13,14 @@
 * remove
 * update
 * view
+
+## auth 
+
+ 
+* newpassword
+* profile
+    - update
+    - view
 
 ## appointment
 

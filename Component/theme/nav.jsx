@@ -19,7 +19,7 @@ export default function Nav() {
         }
     }, [])
     return (
-        <nav className="R-m alignX-full alignY box p-4 sh pup "> 
+        <nav className="R-m alignX-full alignY box  sh pup "> 
             {/* btn menu */}
             <div className="sm-box md-box none" onClick={() => {
                 document.querySelector('.menu').classList.toggle('sm-none')
@@ -53,7 +53,7 @@ function Menu() {
     ]
     let auth = [
         {
-            content: 'login', href: '/admin/login', className: 'sm-m-4 box alignX', style: {
+            content: 'login', href: '/auth/login', className: 'sm-m-4 box alignX', style: {
                 border: '1px solid var(--color-Ui)',
                 color: 'var(--color-Ui)',
                 borderRadius: '10px',
@@ -63,7 +63,7 @@ function Menu() {
                 fontWeight: 700
             }
         },
-        { content: 'signup', href: '/admin/signup', className: 'sm-m-4 btn' },
+        { content: 'signup', href: '/auth/signup', className: 'sm-m-4 btn' },
     ]
     useEffect(() => {
         let token = Cookie.get('token')
