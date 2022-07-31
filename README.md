@@ -3,18 +3,14 @@
 
 ## auth
 
-* login
-    - icon
-* **signup**
-    - icon
-    - validation
-<!-- * repassword -->
-* new password
+ 
+* newpassword
 * profile
     - update
     - view
 
-## admin 
+## admin  
+
  
     - tires
     - appointments
@@ -41,12 +37,18 @@
 
 ## Routes
 
-* /admin/repassword
-* /admin/signup
 * /prodacts
 * /about
 
-images
-formats png, jpg, gif, svg
-size 3mb
-توحيد قياسات الصور
+## api async
+
+    - /login
+    - /signup
+    - /repassword  
+
+## **notes**
+
+* images
+* formats png, jpg, gif, svg
+* size 3mb
+* unite resize image 

@@ -13,8 +13,9 @@ section
     min-height: 500px
     margin-top: 90px
 
-.w-full
-    width: -webkit-fill-available
+@media (min-width: 576px)
+    nav
+        padding: 1em 4em
 
 nav
     width: -webkit-fill-available
@@ -22,7 +23,7 @@ nav
     .menu
         background-color: var(--color-text)
         width: -webkit-fill-available
-        max-width: 576px
+        margin: 0 30px
 
 @media  screen and (max-width: 576px)
     .menu

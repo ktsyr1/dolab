@@ -1,6 +1,7 @@
 import { Input } from "lib/micro";
 import Link from "lib/link";
 import Head from "next/head";
+import cookie from "cookie";
 
 export default function Login() {
     return (
@@ -17,4 +18,10 @@ export default function Login() {
             </from>
         </div >
     )
+}
+
+export async function getServerSideProps({ req }) {
+    let cookies = cookie.parse(req?.headers?.cookie || '')
+    if (cookies?.token) return { redirect: { destination: '/', permanent: true } }
+    else return { props: { msg: 1 } }
 } 

@@ -107,9 +107,11 @@
             color: $colorUIX
             padding: 10px
             margin: 10px
-            @include sh() 
+            @include sh()
             border: 1px solid
-
+        // new classes
+        .#{$tag}w-full
+            width: -webkit-fill-available
 @include responsive('',0,999999px)
 @include responsive('sm-',0px ,576px)
 @include responsive('md-',576px ,768px)

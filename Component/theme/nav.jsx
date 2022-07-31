@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { GridOutline, MenuOutline, SearchOutline } from 'react-ionicons'
+import { GridOutline, MenuOutline, PersonOutline, SearchOutline } from 'react-ionicons'
 import { useEffect, useState } from 'react'
 import Cookie from 'js-cookie'
 import Link from 'lib/link'
@@ -19,17 +19,11 @@ export default function Nav() {
         }
     }, [])
     return (
-        <nav className="R-m alignX-full alignY box p-4 sh pup ">
-            <style jsx>{`
-
-                @media (min-width: 576px){
-                    nav{ padding: 1em 4em }
-                }
-                `}</style>
-
+        <nav className="R-m alignX-full alignY box p-4 sh pup "> 
             {/* btn menu */}
-            <div className="sm-box none" onClick={() => {
+            <div className="sm-box md-box none" onClick={() => {
                 document.querySelector('.menu').classList.toggle('sm-none')
+                document.querySelector('.menu').classList.toggle('md-none')
             }}>
                 <MenuOutline title={'menu'} color={'#00000'} height="40px" width="40px" />
             </div>
@@ -51,10 +45,13 @@ export default function Nav() {
 }
 
 function Menu() {
+    let [Auth, setAuth] = useState('')
     let data = [
         { content: 'Home', href: '/' },
         { content: 'prodect', href: '/prodect' },
-        { content: 'about', href: '/about' },
+        { content: 'about', href: '/about' }
+    ]
+    let auth = [
         {
             content: 'login', href: '/admin/login', className: 'sm-m-4 box alignX', style: {
                 border: '1px solid var(--color-Ui)',
@@ -68,16 +65,41 @@ function Menu() {
         },
         { content: 'signup', href: '/admin/signup', className: 'sm-m-4 btn' },
     ]
-    return (
-        <div className=" menu box row sm-pup sm-col sm-sh sm-none  alignY right-0" >
-            {data.map(a => {
+    useEffect(() => {
+        let token = Cookie.get('token')
+        if (!token) {
+            let links = auth.map(a => {
                 let { href, content, className } = a
                 return (
-                    <Link href={href} key={href} className={"sm-p-4 w-full " + (className ? className : '')} style={a?.style}  >
+                    <Link href={href} key={href} className={"sm-p-4 sm-w-full " + (className ? className : '')} style={a?.style}  >
                         {content}
                     </Link>
                 )
-            })}
+            })
+            setAuth(links)
+        } else {
+            // setAuth(<PersonOutline color={'#00000'} title={'user'} height="35px" width="35px" />)
+            setAuth('.')
+        }
+    }, [])
+
+    return (
+        <div className=" menu box row sm-pup sm-col sm-sh sm-none md-pup md-col md-sh md-none alignY alignY-full right-0" >
+            <div className="box sm-col sm-sh md-col md-sh ">
+                {data.map(a => {
+                    let { href, content, className } = a
+                    return (
+                        <Link href={href} key={href} className={" p-4 sm-w-full " + (className ? className : '')} style={a?.style}  >
+                            {content}
+                        </Link>
+                    )
+                })}
+            </div>
+            <div className="box row sm-col p">
+                {Auth}
+            </div>
+
+
         </div >
     )
 }

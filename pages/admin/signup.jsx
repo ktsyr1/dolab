@@ -22,14 +22,9 @@ export default function Signup(data) {
         </div >
     )
 }
+
 export async function getServerSideProps({ req }) {
-    let { token } = cookie.parse(req?.headers?.cookie)
-    if (token) {
-        return {
-            redirect: {
-                destination: '/',
-                permanent: true,
-            },
-        }
-    } else return { msg: 1 }
+    let cookies = cookie.parse(req?.headers?.cookie || '')
+    if (cookies?.token) return { redirect: { destination: '/', permanent: true } }
+    else return { props: { msg: 1 } }
 } 
