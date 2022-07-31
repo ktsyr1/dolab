@@ -14,7 +14,7 @@ export default function Nav() {
         <nav className="R-m alignX-full alignY box  sh pup ">
             {/* btn menu */}
             <div className="sm-box md-box none" onClick={open}>
-                <MenuOutline title={'menu'} color={"#ffd133"} height="40px" width="40px" />
+                <MenuOutline title={'menu'} color={'#00000'} height="40px" width="40px" />
             </div>
             {/* logo */}
             <Link href={'/'} >
@@ -24,7 +24,7 @@ export default function Nav() {
             <Menu />
             {/* search */}
             <Link href='/search' onClick={open}>
-                <SearchOutline color={"#ffd133"} title={'Search'} height="40px" width="40px" />
+                <SearchOutline color={'#00000'} title={'Search'} height="40px" width="40px" />
             </Link>
         </nav >
     )
@@ -67,12 +67,12 @@ function Menu() {
             let Person = () => (
                 < >
                     <Link href='#' className='box row alignY m'>
-                        <PersonOutline color={"#ffd133"} title={'profile'} height="40px" width="40px" />
-                        <p>profile</p>
+                        <PersonOutline color={'#00000'} title={'profile'} height="40px" width="40px" />
+                        <p  className="p-3">profile</p>
                     </Link>
                     <Link href='/admin' className='box row alignY m'>
-                        <GridOutline color={"#ffd133"} title={'admin'} height="40px" width="40px" />
-                        <p>dashboard</p>
+                        <GridOutline color={'#00000'} title={'admin'} height="40px" width="40px" />
+                        <p className="p-3">dashboard</p>
 
                     </Link>
                 </>

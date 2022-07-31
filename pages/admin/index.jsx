@@ -8,7 +8,7 @@ export default function Admin() {
     return (
         <div className="box alignX">
             <Head>
-                <title>login</title>
+                <title>admin</title>
             </Head>
 
             <center>

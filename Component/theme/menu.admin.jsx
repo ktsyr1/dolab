@@ -15,5 +15,5 @@ export default function MenuAdmin() {
 
 
 let menu = [
-    'tires', 'appointments', 'users','menu','brinds'
+    'tires', 'appointments', 'users','category','brinds'
 ] 
