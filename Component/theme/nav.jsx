@@ -5,27 +5,16 @@ import Cookie from 'js-cookie'
 import Link from 'lib/link'
 
 export default function Nav() {
-    let [admin, setAdmin] = useState('')
-    let [Icons, setIcons] = useState({ width: '40px' })
-    useEffect(() => {
-        let _admin = Cookie.get('-admin')
-        if (_admin) {
-            setAdmin(
-                <Link href='/admin'>
-                    <GridOutline color={'#00000'} title={'admin'} height="40px" width="40px" />
-                </Link>
-            )
-            setIcons({ width: '100px' })
-        }
-    }, [])
+    function open() {
+        document.querySelector('.menu').classList.toggle('sm-none')
+        document.querySelector('.menu').classList.toggle('md-none')
+        console.log('aas');
+    }
     return (
-        <nav className="R-m alignX-full alignY box  sh pup "> 
+        <nav className="R-m alignX-full alignY box  sh pup ">
             {/* btn menu */}
-            <div className="sm-box md-box none" onClick={() => {
-                document.querySelector('.menu').classList.toggle('sm-none')
-                document.querySelector('.menu').classList.toggle('md-none')
-            }}>
-                <MenuOutline title={'menu'} color={'#00000'} height="40px" width="40px" />
+            <div className="sm-box md-box none" onClick={open}>
+                <MenuOutline title={'menu'} color={"#ffd133"} height="40px" width="40px" />
             </div>
             {/* logo */}
             <Link href={'/'} >
@@ -34,12 +23,9 @@ export default function Nav() {
             {/* menu */}
             <Menu />
             {/* search */}
-            <div className="box row alignY alignX-full" style={Icons} >
-                <Link href='/search'>
-                    <SearchOutline color={'#00000'} title={'Search'} height="40px" width="40px" />
-                </Link>
-                {admin}
-            </div>
+            <Link href='/search' onClick={open}>
+                <SearchOutline color={"#ffd133"} title={'Search'} height="40px" width="40px" />
+            </Link>
         </nav >
     )
 }
@@ -78,14 +64,27 @@ function Menu() {
             })
             setAuth(links)
         } else {
-            // setAuth(<PersonOutline color={'#00000'} title={'user'} height="35px" width="35px" />)
-            setAuth('.')
+            let Person = () => (
+                < >
+                    <Link href='#' className='box row alignY m'>
+                        <PersonOutline color={"#ffd133"} title={'profile'} height="40px" width="40px" />
+                        <p>profile</p>
+                    </Link>
+                    <Link href='/admin' className='box row alignY m'>
+                        <GridOutline color={"#ffd133"} title={'admin'} height="40px" width="40px" />
+                        <p>dashboard</p>
+
+                    </Link>
+                </>
+            )
+            setAuth(<Person />)
+            // setAuth('.')
         }
     }, [])
 
     return (
         <div className=" menu box row sm-pup sm-col sm-sh sm-none md-pup md-col md-sh md-none alignY alignY-full right-0" >
-            <div className="box sm-col sm-sh md-col md-sh ">
+            <div className="box sm-col sm-sh md-col md-sh sm-w-full md-w-full">
                 {data.map(a => {
                     let { href, content, className } = a
                     return (
@@ -95,7 +94,7 @@ function Menu() {
                     )
                 })}
             </div>
-            <div className="box row sm-col p">
+            <div className="box row sm-col md-col sm-w-full md-w-full "  >
                 {Auth}
             </div>
 
