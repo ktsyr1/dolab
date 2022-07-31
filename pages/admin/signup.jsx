@@ -23,7 +23,7 @@ export default function Signup(data) {
     )
 }
 export async function getServerSideProps({ req }) {
-    let { token } = cookie.parse(req.headers.cookie)
+    let { token } = cookie.parse(req?.headers?.cookie)
     if (token) {
         return {
             redirect: {
