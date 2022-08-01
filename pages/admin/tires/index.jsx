@@ -11,7 +11,7 @@ export default function Tires() {
                 <title>Tires</title>
             </Head>
 
-            <div className='box col ui '>
+            <div id='froms' className='box col ui '>
                 <div className='box grid alignX '>
                     <Input type='text' name='brind' placeholder="BMW" title='Brind' style={{ width: '20rem' }} />
                     <Input type='text' name='model' title='Model' style={{ width: '20rem' }} />

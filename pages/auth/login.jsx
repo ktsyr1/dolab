@@ -9,7 +9,7 @@ export default function Login() {
             <Head>
                 <title>login</title>
             </Head>
-            <from className='box col ui w-full'>
+            <from  id='froms' className='box col ui w-full'>
                 <h1 className="box alignX m-5">login</h1>
                 <Input type='email' name='email' placeholder="username@mail.com" title='email' />
                 <Input type='password' name='password' title='password' />

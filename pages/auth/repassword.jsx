@@ -11,7 +11,7 @@ export default function Repassword() {
             <Head>
                 <title> {title}  </title>
             </Head>
-            <div className='box col ui w-full from'>
+            <div  id='froms' className='box col ui w-full from'>
                 <h1 className="box alignX m-5" > {title} </h1>
                 <Input type='email' name='email' placeholder="username@mail.com" title='email' />
                 <button className="btn" > {title}</button>
