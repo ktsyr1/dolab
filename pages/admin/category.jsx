@@ -1,6 +1,7 @@
 
 import { Input } from "/lib";
-import Link from "/lib";
+import {Link} from  
+ "/lib";
 import Head from "next/head";
 import cookie from "cookie";
 import ListsCategory from "/Component/lists/category";
@@ -14,7 +15,7 @@ export default function Admin({ categories }) {
             <Head>
                 <title>admin</title>
             </Head>
-            
+
             <Table data={categories} />
         </div>
     )
