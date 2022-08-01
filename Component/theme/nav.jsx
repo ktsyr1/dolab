@@ -2,7 +2,7 @@ import Image from "next/image";
 import { GridOutline, MenuOutline, PersonOutline, SearchOutline } from 'react-ionicons'
 import { useEffect, useState } from 'react'
 import Cookie from 'js-cookie'
-import {Link} from "/lib"
+import { Link } from "/lib"
 
 export default function Nav() {
     function open() {
@@ -68,7 +68,7 @@ function Menu() {
                 < >
                     <Link href='#' className='box row alignY m'>
                         <PersonOutline color={'#00000'} title={'profile'} height="40px" width="40px" />
-                        <p  className="p-3">profile</p>
+                        <p className="p-3">profile</p>
                     </Link>
                     <Link href='/admin' className='box row alignY m'>
                         <GridOutline color={'#00000'} title={'admin'} height="40px" width="40px" />
