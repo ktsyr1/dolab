@@ -8,7 +8,6 @@ export default function Nav() {
     function open() {
         document.querySelector('.menu').classList.toggle('sm-none')
         document.querySelector('.menu').classList.toggle('md-none')
-        console.log('aas');
     }
     return (
         <nav className="R-m alignX-full alignY box  sh pup ">
@@ -21,16 +20,16 @@ export default function Nav() {
                 <Image src={'/images/logo.png'} width={54} height={40} style={{ filter: 'drop-shadow(1px 1px 1px #FFFfff99)' }} />
             </Link>
             {/* menu */}
-            <Menu />
+            <Menu open={open} />
             {/* search */}
-            <Link href='/search' onClick={open}>
+            <Link href='/search'  >
                 <SearchOutline color={'#00000'} title={'Search'} height="40px" width="40px" />
             </Link>
         </nav >
     )
 }
 
-function Menu() {
+function Menu({ open }) {
     let [Auth, setAuth] = useState('')
     let data = [
         { content: 'Home', href: '/' },
@@ -66,11 +65,11 @@ function Menu() {
         } else {
             let Person = () => (
                 < >
-                    <Link href='#' className='box row alignY m'>
+                    <Link href='#' className='box row alignY m' >
                         <PersonOutline color={'#00000'} title={'profile'} height="40px" width="40px" />
                         <p className="p-3">profile</p>
                     </Link>
-                    <Link href='/admin' className='box row alignY m'>
+                    <Link href='/admin' className='box row alignY m' >
                         <GridOutline color={'#00000'} title={'admin'} height="40px" width="40px" />
                         <p className="p-3">dashboard</p>
 
@@ -84,7 +83,7 @@ function Menu() {
 
     return (
         <div className=" menu box row sm-pup sm-col sm-sh sm-none md-pup md-col md-sh md-none alignY alignY-full right-0" >
-            <div className="box sm-col sm-sh md-col md-sh sm-w-full md-w-full">
+            <div className="box sm-col sm-sh md-col md-sh sm-w-full md-w-full" onClick={open}>
                 {data.map(a => {
                     let { href, content, className } = a
                     return (
@@ -94,7 +93,7 @@ function Menu() {
                     )
                 })}
             </div>
-            <div className="box row sm-col md-col sm-w-full md-w-full "  >
+            <div className="box row sm-col md-col sm-w-full md-w-full " onClick={open} >
                 {Auth}
             </div>
 
