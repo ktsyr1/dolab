@@ -2,7 +2,9 @@
 
 import Links from 'next/link'
 
-export default ''
+export default function defaults() {
+    return <div className='box col m-2'> test </div>
+}
 export function Input(props) {
     return (
         <div className='box col m-2'>

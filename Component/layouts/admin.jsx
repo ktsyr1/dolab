@@ -1,4 +1,4 @@
-import MenuAdmin from "Component/theme/menu.admin";
+import MenuAdmin from "/Component/theme/menu.admin";
 import Footer from "../theme/footer";
 import Nav from "../theme/nav";
 

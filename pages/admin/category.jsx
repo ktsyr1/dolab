@@ -1,9 +1,9 @@
 
-import { Input } from "lib/micro";
-import Link from "lib/link";
+import { Input } from "/lib";
+import Link from "/lib";
 import Head from "next/head";
 import cookie from "cookie";
-import ListsCategory from "Component/lists/category";
+import ListsCategory from "/Component/lists/category";
 import { useState } from "react";
 
 export default function Admin({ categories }) {
@@ -14,6 +14,7 @@ export default function Admin({ categories }) {
             <Head>
                 <title>admin</title>
             </Head>
+            
             <Table data={categories} />
         </div>
     )
@@ -36,23 +37,23 @@ export async function getServerSideProps({ req }) {
     else return { props: { categories } }
 }
 let categories = [
-    { _id: 1, name: 'New', slug: 'new' },
-    { _id: 2, name: 'Used', slug: 'used' },
-    { _id: 3, name: 'All Season', slug: 'all-season' },
-    { _id: 4, name: 'Mudder', slug: 'mudder' },
-    { _id: 5, name: 'Tires', slug: 'tires' },
-    { _id: 6, name: 'Appointments', slug: 'appointments' },
-    { _id: 7, name: 'Users', slug: 'users' },
-    { _id: 8, name: 'Category', slug: 'category' },
-    { _id: 9, name: 'Brinds', slug: 'brinds' },
-    { _id: 1, name: 'New', slug: 'new' },
-    { _id: 2, name: 'Used', slug: 'used' },
-    { _id: 3, name: 'All Season', slug: 'all-season' },
-    { _id: 4, name: 'Mudder', slug: 'mudder' },
-    { _id: 5, name: 'Tires', slug: 'tires' },
-    { _id: 6, name: 'Appointments', slug: 'appointments' },
-    { _id: 7, name: 'Users', slug: 'users' },
-    { _id: 8, name: 'Category', slug: 'category' },
-    { _id: 9, name: 'Brinds', slug: 'brinds' },
+    { id: 1, name: 'New', slug: 'new' },
+    { id: 2, name: 'Used', slug: 'used' },
+    { id: 3, name: 'All Season', slug: 'all-season' },
+    { id: 4, name: 'Mudder', slug: 'mudder' },
+    { id: 5, name: 'Tires', slug: 'tires' },
+    { id: 6, name: 'Appointments', slug: 'appointments' },
+    { id: 7, name: 'Users', slug: 'users' },
+    { id: 8, name: 'Category', slug: 'category' },
+    { id: 9, name: 'Brinds', slug: 'brinds' },
+    { id: 11, name: 'New', slug: 'new' },
+    { id: 12, name: 'Used', slug: 'used' },
+    { id: 13, name: 'All Season', slug: 'all-season' },
+    { id: 14, name: 'Mudder', slug: 'mudder' },
+    { id: 15, name: 'Tires', slug: 'tires' },
+    { id: 16, name: 'Appointments', slug: 'appointments' },
+    { id: 17, name: 'Users', slug: 'users' },
+    { id: 18, name: 'Category', slug: 'category' },
+    { id: 19, name: 'Brinds', slug: 'brinds' },
 
 ] 

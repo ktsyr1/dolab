@@ -2,7 +2,7 @@ import Image from "next/image";
 import { GridOutline, MenuOutline, PersonOutline, SearchOutline } from 'react-ionicons'
 import { useEffect, useState } from 'react'
 import Cookie from 'js-cookie'
-import Link from 'lib/link.jsx'
+import {Link} from "/lib"
 
 export default function Nav() {
     function open() {

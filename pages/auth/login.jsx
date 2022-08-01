@@ -1,5 +1,5 @@
-import { Input } from "lib/micro";
-import Link from "lib/link";
+import { Input } from "/lib";
+import Link from "/lib";
 import Head from "next/head";
 import cookie from "cookie";
 

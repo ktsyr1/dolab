@@ -1,4 +1,4 @@
-import Link from "lib/link"
+import {Link} from "/lib"
 
 export default function MenuAdmin() {
     return (

@@ -1,5 +1,5 @@
-import { Input } from "lib/micro";
-import Link from "lib/link";
+import { Input } from "/lib";
+import Link from "/lib";
 import Head from "next/head";
 import { useState } from "react";
 import cookie from "cookie";
@@ -18,7 +18,7 @@ export default function Repassword() {
             </div>
         </div >
     )
-} 
+}
 
 export async function getServerSideProps({ req }) {
     let cookies = cookie.parse(req?.headers?.cookie || '')
