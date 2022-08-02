@@ -2,20 +2,16 @@
 :root
     --color-text: #2b373a
     --color-Text: #21282a
-    --color-ui: #fed752
-    --color-Ui: #ffd133
-    --color-UI: #dcb42f
-    --color-dark: #ffffff
-    --color-Dark: #f2f3f7
-    --color-err: #ff5959
-    --color-Err: #ff2b2b
+    --color-ui: #ff5959
+    --color-Ui: #ff2b2b
+    --color-bg: #ffffff
+    --color-Bg: #f2f3f7
 $colorBG: var(--color-text)
 $colorBGB: var(--color-Text)
-$colorUI: var(--color-Ui)
-$colorUIX: var(--color-UI)
-$colorUIM: var(--color-ui)
-$colorDark: var(--color-dark)
-$colorDarkX: var(--color-Dark)
+$colorUI: var(--color-ui)
+$colorUIX: var(--color-Ui)
+$colorBg: var(--color-bg)
+$colorBgX: var(--color-Bg)
 @font-face
     font-family: uiplus
     src: url(/fonts/fontplus.otf)
@@ -32,8 +28,9 @@ $colorDarkX: var(--color-Dark)
         // border: 1px solid var(--color-Ui)
 .sh
     @include sh()
-.btn ,.btn
+.btn
     background-image: linear-gradient(90deg, var(--color-Ui), var(--color-UI) )
+    background-color: var(--color-Ui)
     padding: 10px
     text-align: center
     border-radius: 10px
@@ -43,7 +40,7 @@ $colorDarkX: var(--color-Dark)
     cursor: pointer
     font-size: larger
     font-weight: 700
-    color: var(--color-text) !important
+    color: var(--color-bg) !important
     &.diseble
         color: $colorUIX
         // background-color: $colorBG
@@ -77,24 +74,8 @@ b
 .page
     max-width: 500px
     width: -webkit-fill-available
-.ui
-    background-color: var(--color-text)
-    // background: linear-gradient(145deg, #e6e6e6, #ffffff)
-    border-radius: 10px
-    color: $colorDarkX
-    padding: 10px
-    margin: 10px
-    @include sh()
-
 button
     border: 0
-svg
-    ._ui
-        stroke: $colorUIX
-        fill: $colorBG
-    .ui
-        stroke: $colorBG
-        fill: $colorUIX
 .rtl
     direction: rtl
 .ltr

@@ -1,10 +1,8 @@
 
 import { Input } from "/lib";
-import { Link } from "/lib";
 import Head from "next/head";
 import cookie from "cookie";
 import ListsCategory from "/Component/lists/category";
-import Forms from "/Component/theme/forms";
 import { useState } from "react";
 
 export default function Admin({ categories }) {
@@ -19,7 +17,7 @@ export default function Admin({ categories }) {
             </Head>
             <div className="box row ui alignY">
                 <h1 className="m">categories</h1>
-                <button className="btn ui" onClick={open}>add cat</button>
+                <button className="btn" onClick={open}>add cat</button>
             </div>
             <Form open={open} />
             {/* <Form open={open} mod='edit' /> */}
@@ -34,10 +32,11 @@ export default function Admin({ categories }) {
 function Form({ open, mod }) {
     return (
         <div id="froms" className={"box col ui none pup " + (mod || '')} style={{ top: '90px' }}>
-            <h2 className="box alignY">add category</h2>
+            <h2 className="box alignX m-5">add category</h2>
+            <p>dgd gfd gdfg f gdfg dfg dfg dfg dfg dfg df </p>
             <Input type="text" name="name" placeholder="name" title={'name'} w />
             <Input type="text" name="slug" placeholder="slug" title={'slug'} />
-            <button className="btn ui" onClick={open}>add</button>
+            <button className="btn" onClick={open}>add</button>
         </div>
     )
 }
@@ -73,23 +72,24 @@ export async function getServerSideProps({ req }) {
     else return { props: { categories } }
 }
 let categories = [
-    { id: 1, name: 'New', slug: 'new' },
-    { id: 2, name: 'Used', slug: 'used' },
-    { id: 3, name: 'All Season', slug: 'all-season' },
-    { id: 4, name: 'Mudder', slug: 'mudder' },
-    { id: 5, name: 'Tires', slug: 'tires' },
-    { id: 6, name: 'Appointments', slug: 'appointments' },
-    { id: 7, name: 'Users', slug: 'users' },
-    { id: 8, name: 'Category', slug: 'category' },
-    { id: 9, name: 'Brinds', slug: 'brinds' },
-    { id: 11, name: 'New', slug: 'new' },
-    { id: 12, name: 'Used', slug: 'used' },
-    { id: 13, name: 'All Season', slug: 'all-season' },
-    { id: 14, name: 'Mudder', slug: 'mudder' },
-    { id: 15, name: 'Tires', slug: 'tires' },
-    { id: 16, name: 'Appointments', slug: 'appointments' },
-    { id: 17, name: 'Users', slug: 'users' },
-    { id: 18, name: 'Category', slug: 'category' },
-    { id: 19, name: 'Brinds', slug: 'brinds' },
-
+    { id: 1, name: 'New' },
+    { id: 2, name: 'Used' },
+    { id: 3, name: 'All Season' },
+    { id: 4, name: 'Mudder' },
+    { id: 5, name: 'Tires' },
+    { id: 6, name: 'Appointments' },
+    { id: 7, name: 'Users' },
+    { id: 8, name: 'Category', },
+    { id: 9, name: 'Brinds' },
+    { id: 10, name: 'Products' },
+    { id: 11, name: 'New' },
+    { id: 12, name: 'Used' },
+    { id: 13, name: 'All Season' },
+    { id: 14, name: 'Mudder' },
+    { id: 15, name: 'Tires' },
+    { id: 16, name: 'Appointments' },
+    { id: 17, name: 'Users' },
+    { id: 18, name: 'Category', },
+    { id: 19, name: 'Brinds' },
+    { id: 20, name: 'Products' },
 ] 

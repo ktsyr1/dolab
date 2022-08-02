@@ -12,7 +12,7 @@ export default function Nav() {
     return (
         <nav className="R-m alignX-full alignY box  sh pup ">
             {/* btn menu */}
-            <div className="sm-box md-box none" onClick={open}>
+            <div className="sm-box md-box  m" onClick={open}>
                 <MenuOutline title={'menu'} color={'#00000'} height="40px" width="40px" />
             </div>
             {/* logo */}
@@ -66,7 +66,7 @@ function Menu({ open }) {
             let Person = () => (
                 < >
                     <Link href='#' className='box row alignY m' >
-                        <PersonOutline color={'#00000'} title={'profile'} height="40px" width="40px" />
+                        <PersonOutline color={'#00000'} title={'profile'} height="30px" width="30px" />
                         <p className="p-3">profile</p>
                     </Link>
                     <Link href='/admin' className='box row alignY m' >

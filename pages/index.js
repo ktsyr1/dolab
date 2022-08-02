@@ -1,5 +1,8 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 export default function Home() {
+    let { locales, defaultLocale } = useRouter()
+    console.log(locales);
     return (
         <div className='box alignX' >
             <Head>
