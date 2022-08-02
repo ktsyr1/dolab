@@ -9,7 +9,7 @@ export function Input(props) {
     return (
         <div className='box col m-2'>
             <p>{props.title}</p>
-            <input {...props} />
+            <input type={props.type ? props.type : 'text'} {...props} />
         </div>
     )
 }
