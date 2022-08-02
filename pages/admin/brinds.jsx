@@ -5,7 +5,7 @@ import cookie from "cookie";
 import ListsCategory from "/Component/lists/category";
 import { useState } from "react";
 
-export default function Admin({ categories }) {
+export default function Admin({ brinds }) {
 
     function open() {
         document.getElementById('forms').classList.toggle('none');
@@ -13,19 +13,14 @@ export default function Admin({ categories }) {
     return (
         <div className="box col w-full  ">
             <Head>
-                <title>categories</title>
+                <title>brinds</title>
             </Head>
             <div className="box row ui alignY">
-                <h1 className="m">categories</h1>
+                <h1 className="m">brinds</h1>
                 <button className="btn" onClick={open}>add cat</button>
             </div>
-            <Form open={open} />
-            {/* <Form open={open} mod='edit' /> */}
-            {/* <Forms open={open} mod='add' title='add category' >
-                <Input name='name' label='name' />
-                <Input name='slug' label='slug' />
-            </Forms> */}
-            <Table data={categories} />
+            <Form open={open} /> 
+            <Table data={brinds} />
         </div>
     )
 }
@@ -92,28 +87,19 @@ function VerifyDelete({ a, set, on }) {
 }
 export async function getServerSideProps({ req }) {
     let cookies = cookie.parse(req?.headers?.cookie || '')
-    if (!cookies?.token) return { redirect: { destination: '/auth/login?back=/admin/category', permanent: true } }
-    else return { props: { categories } }
+    if (!cookies?.token) return { redirect: { destination: '/auth/login?back=/admin/brinds', permanent: true } }
+    else return { props: { brinds } }
 }
-let categories = [
-    { id: 1, name: 'New' },
-    { id: 2, name: 'Used' },
-    { id: 3, name: 'All Season' },
-    { id: 4, name: 'Mudder' },
-    { id: 5, name: 'Tires' },
-    { id: 6, name: 'Appointments' },
-    { id: 7, name: 'Users' },
-    { id: 8, name: 'Category', },
-    { id: 9, name: 'Brinds' },
-    { id: 10, name: 'Products' },
-    { id: 11, name: 'New' },
-    { id: 12, name: 'Used' },
-    { id: 13, name: 'All Season' },
-    { id: 14, name: 'Mudder' },
-    { id: 15, name: 'Tires' },
-    { id: 16, name: 'Appointments' },
-    { id: 17, name: 'Users' },
-    { id: 18, name: 'Category', },
-    { id: 19, name: 'Brinds' },
-    { id: 20, name: 'Products' },
+let brinds = [
+    { id: 1, name: 'BMW' },
+    { id: 2, name: 'Audi' },
+    { id: 3, name: 'Mercedes' },
+    { id: 4, name: 'Ferrari' },
+    { id: 5, name: 'Lamborghini' },
+    { id: 6, name: 'Porsche' },
+    { id: 7, name: 'Bugatti' },
+    { id: 8, name: 'Koenigsegg' },
+    { id: 9, name: 'Aston Martin' },
+    { id: 10, name: 'Jaguar' },
+
 ] 

@@ -9,7 +9,7 @@ export default function Signup(data) {
             <Head>
                 <title>Sign up</title>
             </Head>
-            <div id='froms' className='box col ui w-full from'>
+            <div id='forms' className='box col ui w-full from'>
                 <h1 className="box alignX m-5" >Sign up</h1>
                 <Input type='email' name='email' placeholder="username@mail.com" title='email' />
                 <Input type='text' name='username' placeholder="username" title='username' />
