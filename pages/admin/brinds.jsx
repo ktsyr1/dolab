@@ -1,68 +1,114 @@
 
+
 import { Input } from "/lib";
 import Head from "next/head";
 import cookie from "cookie";
-import ListsCategory from "/Component/lists/category";
-import { useState } from "react";
+import { Component, useContext, useState } from "react";
+import Forms from "/Component/theme/forms";
+import BrindContext from "/Component/context/brind";
+import { PencilOutline, TrashOutline } from "react-ionicons";
+// nextjs useing routes 
 
-export default function Admin({ brinds }) {
-
-    function open() {
-        document.getElementById('forms').classList.toggle('none');
+export default class BrindsPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: props.brinds,
+            One: null,
+            title: 'add brind',
+            Text: props.Text,
+        };
     }
-    return (
-        <div className="box col w-full  ">
-            <Head>
-                <title>brinds</title>
-            </Head>
-            <div className="box row ui alignY">
-                <h1 className="m">brinds</h1>
-                <button className="btn" onClick={open}>add cat</button>
-            </div>
-            <Form open={open} /> 
-            <Table data={brinds} />
-        </div>
-    )
+    render() {
+        console.log(this)
+        // let update = (newData) => this.setState({ data: newData })
+        let updateOne = (newData) => { this.setState({ One: newData }); console.log(newData) }
+        let { Text } = this.state
+        console.log(Text)
+        let name = this.state?.One?.name
+        return (
+            <BrindContext.Provider value={this.state}>
+                <div className="box col w-full  ">
+                    <Head>
+                        <title>{Text.brinds}</title>
+                    </Head>
+                    <div className="box row ui alignY">
+                        <h1 className="m">{Text.brinds}</h1>
+                        <button className="btn " onClick={this.context.open}>{Text.add_brind}</button>
+                    </div>
+                    <Forms title={Text.add_brind}  >
+                        <Input type="text" name="name" placeholder={Text.name} title={Text.name} />
+                    </Forms>
+                    <Forms classes='FormEdit' title={Text.edit_brind} >
+                        <Input type="text" name="name" placeholder={Text.name} title={Text.name} defaultValue={name} />
+                    </Forms>
+                    <Table data={this.state.data} updateOne={updateOne} />
+                </div>
+            </BrindContext.Provider >
+        );
+    }
 }
-function Form({ open, className, data = "" }) {
-    return (
-        <div id="forms" className={"box col ui none pup " + className} style={{ top: '90px' }}>
-            <h2 className="box alignX m-5">add category</h2>
-            <Input type="text" name="name" placeholder="name" title={'name'} defaultValue={data} />
-            <button className="btn" onClick={open}>add</button>
-        </div>
-    )
-}
-function Table({ data }) {
-    let [_data, setData] = useState(data);
-    if (data?.length > 0) {
-        // onDelete, onEdit
+BrindsPage.contextType = BrindContext;
 
+
+export function List({ data, classNames, onDelete, onEdit }) {
+    let { name } = data
+    return (
+        <>
+            <div className={"box row w-full alignY alignX-full " + classNames}>
+                <p className="w-10 p "  >{name}</p>
+                <div className="box rew ">
+                    {onDelete ?
+                        <div className="m" onClick={onDelete}>
+                            <TrashOutline width={'20px'} height={'20px'} />
+                        </div>
+                        : ""}
+                    {onEdit ?
+                        <div className="m" onClick={onEdit}>
+                            <PencilOutline width={'20px'} height={'20px'} />
+                        </div>
+                        : "-"}
+                </div>
+            </div>
+            <hr />
+        </>
+    )
+}
+function Table({ updateOne, open }) {
+    let Context = useContext(BrindContext);
+    let [_data, setData] = useState(Context.data);
+    let [One, setOne] = useState(null)
+    if (_data?.length > 0) {
+        // onDelete, onEdit 
+        let setDelete = () => document.querySelector('.VerifyDelete')?.classList.toggle('none')
+        function onDelete() {
+            // delete id from data
+            let newData = _data.filter(item => item.id !== One.id);
+            setData(newData);
+            Context.setdata = newData;
+            setDelete()
+        }
         return (
             <div className="box col w-full ui  ">
-                <ListsCategory data={{ name: 'name', slug: 'slug' }} classNames='color-ui' />
+                {One ? <VerifyDelete data={One} open={setDelete} Delete={onDelete} /> : ''}
+                <List data={{ name: 'name' }} classNames='color-ui' />
                 {_data.map(a => {
-                    function setDelete() {
-                        document.querySelector('.d' + a.id).classList.toggle('none')
+
+                    let onEdit = () => {
+                        updateOne(a)
+                        setTimeout(() => {
+                            document.querySelector('.FormEdit')?.classList.toggle('none')
+                        }, 500)
                     }
-                    function onDelete() {
-                        // delete id from data
-                        let newData = _data.filter(item => item.id !== a.id);
-                        setData(newData);
+                    let Delete = () => {
+                        if (One === null) {
+                            setOne(a);
+                            setTimeout(setDelete, 500)
+                        }
+                        setOne(a);
                         setDelete()
                     }
-                    function onEdit() {
-                        // edit id from data
-                        document.querySelector('.ed' + a.id).classList.toggle('none')
-
-                    }
-                    return (
-                        <>
-                            <VerifyDelete a={a} set={setDelete} on={onDelete} />
-                            <Form data={a.name} className={'ed' + a.id} open={onEdit} />
-
-                            <ListsCategory data={a} key={a.id} onDelete={setDelete} onEdit={onEdit} />
-                        </>)
+                    return <List data={a} key={a.id} onDelete={Delete} onEdit={onEdit} />
                 })}
             </div >
         )
@@ -70,14 +116,20 @@ function Table({ data }) {
         return <div className="box alignX ui"> not data </div>
     }
 }
-function VerifyDelete({ a, set, on }) {
+function VerifyDelete({ data, open, Delete }) {
+    let { Text } = useContext(BrindContext)
+    console.log(Text);
     return (
-        <div className={'pup none d' + a.id}>
-            <div id="forms" className="box col ui" >
-                <p style={{ margin: '10px 50px' }}>delete for cat <b>{a.name}</b> </p>
+        <div className={'pup none forms m-auto box alignX alignY VerifyDelete '} style={{
+            width: '100%', height: '100%', right: 0, top: 0
+        }}>
+            <div style={{ width: '100%', height: '100%', backdropFilter: 'blur(10px)' }} />
+
+            <div id="forms" className=" box col ui pup m-auto" >
+                <p className="m-auto p-5" >{Text?.delete_for_brind} <b>{data.name}</b> </p>
                 <div className="box row">
-                    <button className="btn w-full m diseble" onClick={set}>close</button>
-                    <button className="btn w-full m" onClick={on}>Delete</button>
+                    <button className="btn w-full m diseble" onClick={open}>{Text?.close}</button>
+                    <button className="btn w-full m" onClick={Delete}>{Text?.delete}</button>
 
                 </div>
             </div>
@@ -85,10 +137,11 @@ function VerifyDelete({ a, set, on }) {
         </div>
     )
 }
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps({ req, locale }) {
     let cookies = cookie.parse(req?.headers?.cookie || '')
+    let Text = await import('/lib/lang.json')
     if (!cookies?.token) return { redirect: { destination: '/auth/login?back=/admin/brinds', permanent: true } }
-    else return { props: { brinds } }
+    else return { props: { brinds, Text: Text[locale.slice(0, 2)] } }
 }
 let brinds = [
     { id: 1, name: 'BMW' },

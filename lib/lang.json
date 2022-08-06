@@ -1,0 +1,15 @@
+{
+  "en": {
+    "brinds": "Brinds",
+    "add_brind": "Add brind",
+    "edit_brind": "Edit brind",
+    "delete_for_brind": "Delete for brind ",
+    "categories": "categories",
+    "add_category": "Add category",
+    "edit_category": "Edit category",
+    "delete_for_category": "delete for category ",
+    "name": "Name",
+    "close": "Close",
+    "delete": "Delete"
+  }
+}
