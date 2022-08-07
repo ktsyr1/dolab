@@ -1,6 +1,8 @@
 
 
 import Links from 'next/link'
+import { useRouter } from 'next/router'
+import lang_data from '/lib/lang.json'
 
 export default function defaults() {
     return <div className='box col m-2'> test </div>
@@ -34,4 +36,7 @@ export function Title(props) {
             </div>
         </div>
     );
+}
+export async function LangContext(locale = 'en') {
+    return lang_data[locale]
 }

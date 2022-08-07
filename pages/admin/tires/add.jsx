@@ -6,8 +6,9 @@ import cookie from "cookie";
 import Forms from "/Component/theme/forms";
 import { Title } from "/lib";
 import { useEffect, useState } from "react";
+import { LangContext } from "../../../lib";
 
-export default function Tires({ Text }) {
+export default function Tires({ lang }) {
     let [icon, setIcon] = useState('http://localhost:3000/_next/image?url=%2Fimages%2Flogo.png&w=64&q=75')
     // images
     let [images, setImages] = useState([]);
@@ -60,9 +61,9 @@ export default function Tires({ Text }) {
     return (
         <div className="box col w-full ">
             <Head>
-                <title>{Text.add_tire}</title>
+                <title>{lang.add_tire}</title>
             </Head>
-            <Title title={Text.add_tire} ui />
+            <Title title={lang.add_tire} ui />
 
             <div className="box grid alignX">
                 <Forms type=' ' formStyle={style} style={style} >
@@ -75,7 +76,6 @@ export default function Tires({ Text }) {
                             <Input type='text' name='brind' placeholder="BMW" title='Brind' style={{ width: '20rem' }} />
                             <Input type='text' name='model' title='Model' style={{ width: '20rem' }} />
                             <Input type='text' name='location' placeholder="0" title='Location' style={{ width: '20rem' }} />
-                            <Input type='text' name='category' placeholder="New , Used , ..." title='tire type' style={{ width: '20rem' }} />
                             <Input type='text' name='private' placeholder="0" title='private Notes' style={{ width: '20rem' }} />
                             <Input type='text' name='public' placeholder="0" title='public Notes' style={{ width: '20rem' }} />
 
@@ -105,7 +105,11 @@ export default function Tires({ Text }) {
                             <b>assets</b>
                             <hr />
                             <div className='box col alignX '>
-                                <Input type='file' name='icon' title='photo tires' style={{ width: '20rem' }} accept="image/png, image/jpeg, " />
+
+                                <Input type='file' name='icon' title='icon tires' style={{ width: '20rem' }}
+                                    //  - formats png, jpg, gif, svg
+                                    accept="image/png, image/jpeg, image/gif"
+                                />
                                 <img src={icon} style={{ width: '20rem' }} />
                             </div>
                             <hr />
@@ -124,7 +128,8 @@ export default function Tires({ Text }) {
 }
 export async function getServerSideProps({ req, locale }) {
     let cookies = cookie.parse(req?.headers?.cookie || '')
-    let Text = await import('/lib/lang.json')
+    let lang = LangContext(locale)
+
     if (!cookies?.token) return { redirect: { destination: '/auth/login?back=/admin/tires', permanent: true } }
-    else return { props: { Text: Text[locale.slice(0, 2)] } }
+    else return { props: lang }
 } 

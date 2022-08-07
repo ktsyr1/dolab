@@ -1,13 +1,12 @@
 
 
-import { Input } from "/lib";
+import { Input ,Title } from "/lib";
 import Head from "next/head";
 import cookie from "cookie";
 import { Component, useContext, useState } from "react";
 import Forms from "/Component/theme/forms";
 import BrindContext from "/Component/context/brind";
-import { PencilOutline, TrashOutline } from "react-ionicons";
-import { Title } from "../../lib";
+import { PencilOutline, TrashOutline } from "react-ionicons"; 
 // nextjs useing routes 
 
 export default class BrindsPage extends Component {

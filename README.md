@@ -9,7 +9,7 @@
 
 ## tires
 
-* add
+<!-- * add -->
 * remove
 * update
 * view
@@ -36,10 +36,10 @@
 
 ## Routes
 
-* /prodacts
-* /about
+    - /prodacts
+    - /about
 
-## api async
+## api async 
 
     - /login
     - /signup
@@ -47,7 +47,29 @@
 
 ## **notes**
 
-* images
-* formats png, jpg, gif, svg
-* size 3mb
-* unite resize image 
+<!-- * images -->
+    - formats png, jpg, gif, svg
+    - size 3mb
+    - unite resize image 
+
+tires schema
+
+    {
+        "Brind": "",
+        "Model": "",
+        "Location": "",
+        "type": "",
+        "private": "",
+        "public": "",
+        "width": "",
+        "aspect": "",
+        "Rim": "",
+        "speed": "",
+        "Tread": "",
+        "stock": "",
+        "Cost": "",
+        "Wholesale": "",
+        "Retail": "",
+        "icon": "",
+        "images": ""
+    }
