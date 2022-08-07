@@ -15,10 +15,23 @@ export function Input(props) {
 }
 export function Link({ href, children, className, style }) {
     return (
-        <Links href={href || "#"} >
+        <Links href={href || "#"} lang='en' >
             <a className={className || ''} style={style}>
                 {children}
             </a>
         </Links>
     )
+}
+
+export function Title(props) {
+
+    let { title, close, className, style, btns, btn, tag, ui, border } = props
+    return (
+        <div className={`Title box row alignY ${className ? className : ''} ${ui ? 'ui' : ''} `} style={style}>
+            {title ? <h1 className='m'>{title}</h1> : ""}
+            <div className="box R row center-full" >
+                {props.children}
+            </div>
+        </div>
+    );
 }

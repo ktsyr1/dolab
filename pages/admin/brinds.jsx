@@ -7,6 +7,7 @@ import { Component, useContext, useState } from "react";
 import Forms from "/Component/theme/forms";
 import BrindContext from "/Component/context/brind";
 import { PencilOutline, TrashOutline } from "react-ionicons";
+import { Title } from "../../lib";
 // nextjs useing routes 
 
 export default class BrindsPage extends Component {
@@ -20,11 +21,9 @@ export default class BrindsPage extends Component {
         };
     }
     render() {
-        console.log(this)
         // let update = (newData) => this.setState({ data: newData })
         let updateOne = (newData) => { this.setState({ One: newData }); console.log(newData) }
         let { Text } = this.state
-        console.log(Text)
         let name = this.state?.One?.name
         return (
             <BrindContext.Provider value={this.state}>
@@ -32,10 +31,10 @@ export default class BrindsPage extends Component {
                     <Head>
                         <title>{Text.brinds}</title>
                     </Head>
-                    <div className="box row ui alignY">
-                        <h1 className="m">{Text.brinds}</h1>
+
+                    <Title title={Text.brinds} ui >
                         <button className="btn " onClick={this.context.open}>{Text.add_brind}</button>
-                    </div>
+                    </Title>
                     <Forms title={Text.add_brind}  >
                         <Input type="text" name="name" placeholder={Text.name} title={Text.name} />
                     </Forms>
@@ -91,7 +90,7 @@ function Table({ updateOne, open }) {
         return (
             <div className="box col w-full ui  ">
                 {One ? <VerifyDelete data={One} open={setDelete} Delete={onDelete} /> : ''}
-                <List data={{ name: 'name' }} classNames='color-ui' />
+                <List data={{ name: Context.Text.name }} classNames='color-ui' />
                 {_data.map(a => {
 
                     let onEdit = () => {

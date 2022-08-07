@@ -7,35 +7,32 @@ import { Component, useContext, useState } from "react";
 import Forms from "/Component/theme/forms";
 import BrindContext from "/Component/context/brind";
 import { PencilOutline, TrashOutline } from "react-ionicons";
+import { Title } from "../../lib";
 // nextjs useing routes 
 
 export default class BrindsPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: props.brinds,
+            data: props.categories,
             One: null,
-            title: 'add brind',
             Text: props.Text,
         };
     }
     render() {
-        console.log(this)
         // let update = (newData) => this.setState({ data: newData })
         let updateOne = (newData) => { this.setState({ One: newData }); console.log(newData) }
-        let { Text } = this.state
-        console.log(Text)
+        let { Text } = this.state 
         let name = this.state?.One?.name
         return (
             <BrindContext.Provider value={this.state}>
                 <div className="box col w-full  ">
                     <Head>
-                        <title>{Text.brinds}</title>
+                        <title>{Text.categories}</title>
                     </Head>
-                    <div className="box row ui alignY">
-                        <h1 className="m">{Text.brinds}</h1>
+                    <Title title={Text.categories} ui >
                         <button className="btn " onClick={this.context.open}>{Text.add_category}</button>
-                    </div>
+                    </Title>
                     <Forms title={Text.add_category}  >
                         <Input type="text" name="name" placeholder={Text.name} title={Text.name} />
                     </Forms>
@@ -87,11 +84,11 @@ function Table({ updateOne, open }) {
             setData(newData);
             Context.setdata = newData;
             setDelete()
-        }
+        };
         return (
             <div className="box col w-full ui  ">
                 {One ? <VerifyDelete data={One} open={setDelete} Delete={onDelete} /> : ''}
-                <List data={{ name: 'name' }} classNames='color-ui' />
+                <List data={{ name: Context.Text.name }} classNames='color-ui' />
                 {_data.map(a => {
 
                     let onEdit = () => {
@@ -118,7 +115,6 @@ function Table({ updateOne, open }) {
 }
 function VerifyDelete({ data, open, Delete }) {
     let { Text } = useContext(BrindContext)
-    console.log(Text);
     return (
         <div className={'pup none forms m-auto box alignX alignY VerifyDelete '} style={{
             width: '100%', height: '100%', right: 0, top: 0
@@ -141,18 +137,28 @@ export async function getServerSideProps({ req, locale }) {
     let cookies = cookie.parse(req?.headers?.cookie || '')
     let Text = await import('/lib/lang.json')
     if (!cookies?.token) return { redirect: { destination: '/auth/login?back=/admin/brinds', permanent: true } }
-    else return { props: { brinds, Text: Text[locale.slice(0, 2)] } }
+    else return { props: { categories, Text: Text[locale.slice(0, 2)] } }
 }
-let brinds = [
-    { id: 1, name: 'BMW' },
-    { id: 2, name: 'Audi' },
-    { id: 3, name: 'Mercedes' },
-    { id: 4, name: 'Ferrari' },
-    { id: 5, name: 'Lamborghini' },
-    { id: 6, name: 'Porsche' },
-    { id: 7, name: 'Bugatti' },
-    { id: 8, name: 'Koenigsegg' },
-    { id: 9, name: 'Aston Martin' },
-    { id: 10, name: 'Jaguar' },
 
+let categories = [
+    { id: 1, name: 'New' },
+    { id: 2, name: 'Used' },
+    { id: 3, name: 'All Season' },
+    { id: 4, name: 'Mudder' },
+    { id: 5, name: 'Tires' },
+    { id: 6, name: 'Appointments' },
+    { id: 7, name: 'Users' },
+    { id: 8, name: 'Category', },
+    { id: 9, name: 'Brinds' },
+    { id: 10, name: 'Products' },
+    { id: 11, name: 'New' },
+    { id: 12, name: 'Used' },
+    { id: 13, name: 'All Season' },
+    { id: 14, name: 'Mudder' },
+    { id: 15, name: 'Tires' },
+    { id: 16, name: 'Appointments' },
+    { id: 17, name: 'Users' },
+    { id: 18, name: 'Category', },
+    { id: 19, name: 'Brinds' },
+    { id: 20, name: 'Products' },
 ] 

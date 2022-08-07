@@ -3,11 +3,14 @@ import { GridOutline, MenuOutline, PersonOutline, SearchOutline } from 'react-io
 import { useEffect, useState } from 'react'
 import Cookie from 'js-cookie'
 import { Link } from "/lib"
+import lang from "/lib/lang.json"
+import { useRouter } from "next/router";
 
 export default function Nav() {
     function open() {
         document.querySelector('.menu').classList.toggle('sm-none')
         document.querySelector('.menu').classList.toggle('md-none')
+        document.querySelector('.menu_admin')?.classList.toggle('none')
     }
     return (
         <nav className="R-m alignX-full alignY box  sh pup ">
@@ -31,10 +34,11 @@ export default function Nav() {
 
 function Menu({ open }) {
     let [Auth, setAuth] = useState('')
+    let { locale } = useRouter()
     let data = [
-        { content: 'Home', href: '/' },
-        { content: 'prodect', href: '/prodect' },
-        { content: 'about', href: '/about' }
+        { content: lang[locale]?.home, href: '/' },
+        { content: lang[locale]?.product, href: '/#' },
+        { content: lang[locale]?.about, href: '/?' }
     ]
     let auth = [
         {
@@ -45,10 +49,11 @@ function Menu({ open }) {
                 margin: '0 1rem',
                 padding: '10px',
                 fontSize: 'larger',
-                fontWeight: 700
+                fontWeight: 700,
+                minWidth: "120px"
             }
         },
-        { content: 'signup', href: '/auth/signup', className: 'sm-m-4 btn' },
+        { content: 'signup', href: '/auth/signup', className: 'sm-m-4 btn', style: { minWidth: "120px" } },
     ]
     useEffect(() => {
         let token = Cookie.get('token')
@@ -57,7 +62,7 @@ function Menu({ open }) {
                 let { href, content, className } = a
                 return (
                     <Link href={href} key={href} className={"sm-p-4 sm-w-full " + (className ? className : '')} style={a?.style}  >
-                        {content}
+                        {lang[locale][content]}
                     </Link>
                 )
             })
