@@ -21,6 +21,7 @@ export default function Tires({ lang }) {
 
         document.querySelector('[name=icon]').addEventListener('change', (e) => {
             let file = e.target.files[0]
+            console.log(file);
             let reader = new FileReader()
             reader.readAsDataURL(file)
             reader.onload = (e) => setIcon(e.target.result)
