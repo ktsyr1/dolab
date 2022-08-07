@@ -22,7 +22,7 @@ export default class BrindsPage extends Component {
     }
     render() {
         // let update = (newData) => this.setState({ data: newData })
-        let updateOne = (newData) => { this.setState({ One: newData }); console.log(newData) }
+        let updateOne = (newData) => { this.setState({ One: newData }); }
         let { Text } = this.state
         let name = this.state?.One?.name
         return (
@@ -116,8 +116,7 @@ function Table({ updateOne, open }) {
     }
 }
 function VerifyDelete({ data, open, Delete }) {
-    let { Text } = useContext(BrindContext)
-    console.log(Text);
+    let { Text } = useContext(BrindContext) 
     return (
         <div className={'pup none forms m-auto box alignX alignY VerifyDelete '} style={{
             width: '100%', height: '100%', right: 0, top: 0

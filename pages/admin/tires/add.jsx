@@ -7,7 +7,7 @@ import Forms from "/Component/theme/forms";
 import { Title } from "/lib";
 import { useEffect, useState } from "react";
 import { LangContext } from "../../../lib";
-
+import Image from "next/image";
 export default function Tires({ lang }) {
     let [icon, setIcon] = useState('http://localhost:3000/_next/image?url=%2Fimages%2Flogo.png&w=64&q=75')
     // images
@@ -21,7 +21,6 @@ export default function Tires({ lang }) {
 
         document.querySelector('[name=icon]').addEventListener('change', (e) => {
             let file = e.target.files[0]
-            console.log(file);
             let reader = new FileReader()
             reader.readAsDataURL(file)
             reader.onload = (e) => setIcon(e.target.result)
@@ -44,21 +43,12 @@ export default function Tires({ lang }) {
                     setImages(imgesSet)
                 }
             }
-
             if (files) {
                 Array.prototype.forEach.call(files, readAndPreview);
             }
-
-            // files?.map((file, i) => {
-            //     let reader = new FileReader();
-            //     console.log(reader);
-            //     // reader?.readAsDataURL(file);
-            //     reader.onloadend= () => setImages([...images, reader.result])
-
-            // })
         })
     }, [])
-    console.log(images)
+    // console.log(images)
     return (
         <div className="box col w-full ">
             <Head>
@@ -111,7 +101,7 @@ export default function Tires({ lang }) {
                                     //  - formats png, jpg, gif, svg
                                     accept="image/png, image/jpeg, image/gif"
                                 />
-                                <img src={icon} style={{ width: '20rem' }} />
+                                <Image src={icon} style={{ width: '20rem' }} width />
                             </div>
                             <hr />
                             <div className='box col alignX '>

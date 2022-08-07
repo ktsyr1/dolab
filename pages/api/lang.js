@@ -1,9 +1,7 @@
 import fs from 'fs';
-export default (req, res) => {
+export default function addTextLagng(req, res) {
     let { body } = req
     let langs = fs.readFileSync('./lib/lang.json', body)
-
-    console.log(body);
     langs = JSON.parse(langs)
     langs.en[body?.key] = body.en
     langs.ar[body?.key] = body.ar

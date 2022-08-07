@@ -3,8 +3,7 @@ import { LangContext, Link } from "/lib"
 
 export default function MenuAdmin() {
     let { locale } = useRouter()
-    let lang = LangContext(locale)
-    console.log(lang);
+    let lang = LangContext(locale) 
     let menu = [
         'tires',
         // 'appointments',
