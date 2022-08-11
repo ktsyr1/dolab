@@ -38,12 +38,7 @@
 
     - /prodacts
     - /about
-
-## api async 
-
-    - /login
-    - /signup
-    - /repassword  
+ 
 
 ## **notes**
 
@@ -51,25 +46,4 @@
     - formats png, jpg, gif, svg
     - size 3mb
     - unite resize image 
-
-tires schema
-
-    {
-        "Brind": "",
-        "Model": "",
-        "Location": "",
-        "type": "",
-        "private": "",
-        "public": "",
-        "width": "",
-        "aspect": "",
-        "Rim": "",
-        "speed": "",
-        "Tread": "",
-        "stock": "",
-        "Cost": "",
-        "Wholesale": "",
-        "Retail": "",
-        "icon": "",
-        "images": ""
-    }
+ 

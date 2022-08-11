@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { LangContext } from "../lib";
+import { LangContext } from "/lib";
 export default function Search() {
     let lang = LangContext()
 

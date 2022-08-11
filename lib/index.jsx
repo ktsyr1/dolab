@@ -15,9 +15,9 @@ export function Input(props) {
         </div>
     )
 }
-export function Link({ href, children, className, style }) {
+export function Link({ href, children, className, style, locale     }) {
     return (
-        <Links href={href || "#"} lang='en' >
+        <Links href={href || "#"} lang='en' locale={locale}>
             <a className={className || ''} style={style}>
                 {children}
             </a>
@@ -37,6 +37,6 @@ export function Title(props) {
         </div>
     );
 }
-export async function LangContext(locale = 'en') {
+export function LangContext(locale = 'en') {
     return lang_data[locale]
 }

@@ -6,10 +6,10 @@ import cookie from "cookie";
 import Forms from "/Component/theme/forms";
 import { Title } from "/lib";
 import { useEffect, useState } from "react";
-import { LangContext } from "../../../lib";
+import { LangContext } from "/lib";
 import Image from "next/image";
 export default function Tires({ lang }) {
-    let [icon, setIcon] = useState('http://localhost:3000/_next/image?url=%2Fimages%2Flogo.png&w=64&q=75')
+    let [icon, setIcon] = useState('/_next/image?url=%2Fimages%2Flogo.png&w=64&q=75')
     // images
     let [images, setImages] = useState([]);
     let open = () => document.querySelector('.forms').classList.toggle('none')
@@ -101,7 +101,7 @@ export default function Tires({ lang }) {
                                     //  - formats png, jpg, gif, svg
                                     accept="image/png, image/jpeg, image/gif"
                                 />
-                                <Image src={icon} style={{ width: '20rem' }} width />
+                                <Image src={icon} width='200px' height='200px' loading="lazy" />
                             </div>
                             <hr />
                             <div className='box col alignX '>
@@ -120,7 +120,6 @@ export default function Tires({ lang }) {
 export async function getServerSideProps({ req, locale }) {
     let cookies = cookie.parse(req?.headers?.cookie || '')
     let lang = LangContext(locale)
-
     if (!cookies?.token) return { redirect: { destination: '/auth/login?back=/admin/tires', permanent: true } }
-    else return { props: lang }
+    else return { props: {lang:lang} }
 } 

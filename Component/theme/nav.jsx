@@ -2,9 +2,8 @@ import Image from "next/image";
 import { GridOutline, MenuOutline, PersonOutline, SearchOutline } from 'react-ionicons'
 import { useEffect, useState } from 'react'
 import Cookie from 'js-cookie'
-import { Link } from "/lib"
-import lang from "/lib/lang.json"
 import { useRouter } from "next/router";
+import { LangContext, Link } from "/lib"
 
 export default function Nav() {
     function open() {
@@ -25,7 +24,7 @@ export default function Nav() {
             {/* menu */}
             <Menu open={open} />
             {/* search */}
-            <Link href='/search'  >
+            <Link href='/search' className='sm-box md-box m'  >
                 <SearchOutline color={'#00000'} title={'Search'} height="40px" width="40px" />
             </Link>
         </nav >
@@ -34,11 +33,13 @@ export default function Nav() {
 
 function Menu({ open }) {
     let [Auth, setAuth] = useState('')
-    let { locale } = useRouter()
+    let { locale, asPath } = useRouter()
+
+    let lang = LangContext(locale) 
     let data = [
-        { content: lang[locale]?.home, href: '/' },
-        { content: lang[locale]?.product, href: '/#' },
-        { content: lang[locale]?.about, href: '/?' }
+        { content: lang?.home, href: '/' },
+        { content: lang?.product, href: '/#' },
+        { content: lang?.about, href: '/?' }
     ]
     let auth = [
         {
@@ -62,7 +63,7 @@ function Menu({ open }) {
                 let { href, content, className } = a
                 return (
                     <Link href={href} key={href} className={"sm-p-4 sm-w-full " + (className ? className : '')} style={a?.style}  >
-                        {lang[locale][content]}
+                        {content}
                     </Link>
                 )
             })
@@ -72,11 +73,11 @@ function Menu({ open }) {
                 < >
                     <Link href='#' className='box row alignY m' >
                         <PersonOutline color={'#00000'} title={'profile'} height="30px" width="30px" />
-                        <p className="p-3">profile</p>
+                        <p className="p-3">{lang?.profile}</p>
                     </Link>
                     <Link href='/admin' className='box row alignY m' >
                         <GridOutline color={'#00000'} title={'admin'} height="40px" width="40px" />
-                        <p className="p-3">dashboard</p>
+                        <p className="p-3">{lang?.dashboard}</p>
 
                     </Link>
                 </>
@@ -85,18 +86,23 @@ function Menu({ open }) {
             // setAuth('.')
         }
     }, [])
-
+    let setlang = () => router.push(asPath, asPath, { locale: 'en' })
     return (
         <div className=" menu box row sm-pup sm-col sm-sh sm-none md-pup md-col md-sh md-none alignY alignY-full right-0" >
             <div className="box sm-col sm-sh md-col md-sh sm-w-full md-w-full" onClick={open}>
                 {data.map(a => {
-                    let { href, content, className } = a
+                    let { href, content, className } = a 
                     return (
                         <Link href={href} key={href} className={" p-4 sm-w-full " + (className ? className : '')} style={a?.style}  >
                             {content}
                         </Link>
                     )
                 })}
+                {
+                    locale !== 'en'
+                        ? <Link className='p sm-w-full' href={asPath} locale="en" >english</Link>
+                        : <Link className='p sm-w-full' href={asPath} locale="ar">عربي</Link>
+                }
             </div>
             <div className="box row sm-col md-col sm-w-full md-w-full " onClick={open} >
                 {Auth}
