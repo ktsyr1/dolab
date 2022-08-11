@@ -21,8 +21,8 @@ export default function Tires({ tires, Text }) {
             </Title>
             <div>
                 {tires?.map((tire, i) => {
-                    return<p className="p m w-full ui"> {tire.Brind}</p>
-              
+                    return <p className="p m w-full ui" key={i}> {tire.Brind}</p>
+
                 })}
             </div>
         </div >
