@@ -23,6 +23,7 @@ export default function Tires({ lang }) {
             let file = e.target.files[0]
             let reader = new FileReader()
             reader.readAsDataURL(file)
+            console.log(file);
             reader.onload = (e) => setIcon(e.target.result)
 
         })
@@ -101,7 +102,7 @@ export default function Tires({ lang }) {
                                     //  - formats png, jpg, gif, svg
                                     accept="image/png, image/jpeg, image/gif"
                                 />
-                                <Image src={icon} width='200px' height='200px' loading="lazy" />
+                                <Image src={icon} width='200px' height='200px' loading="lazy" alt="icon tires" />
                             </div>
                             <hr />
                             <div className='box col alignX '>
