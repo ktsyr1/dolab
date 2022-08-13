@@ -2,9 +2,9 @@ import '../styles/globals.css'
 import '../styles/style.sass'
 import '../styles/theme.sass'
 import '../styles/theme@v2.sass'
-import Layout from '/Component/layouts/app'
+import Layout from '/lib/layouts/app'
 import { useRouter } from 'next/router'
-import LayoutAdmin from '/Component/layouts/admin'
+import LayoutAdmin from '/lib/layouts/admin'
 
 function MyApp({ Component, pageProps }) {
     let route = useRouter()

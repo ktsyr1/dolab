@@ -8,14 +8,27 @@ export default function defaults() {
     return <div className='box col m-2'> test </div>
 }
 export function Input(props) {
+    let { locale } = useRouter()
+    let lang = LangContext(locale)
+    let title = props?.title ? props.title : lang[props.name]
+    console.log(lang[props.type]);
     return (
         <div className='box col m-2'>
-            <p>{props.title}</p>
+            <p>{title}</p>
             <input type={props.type ? props.type : 'text'} {...props} />
         </div>
     )
 }
-export function Link({ href, children, className, style, locale     }) {
+
+export function InputLines(props) {
+    return (
+        <div className='box col m-2'>
+            <p>{props.title}</p>
+            <textarea type={props.type ? props.type : 'text'} {...props} />
+        </div>
+    )
+}
+export function Link({ href, children, className, style, locale }) {
     return (
         <Links href={href || "#"} lang='en' locale={locale}>
             <a className={className || ''} style={style}>

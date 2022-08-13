@@ -46,4 +46,4 @@
     - formats png, jpg, gif, svg
     - size 3mb
     - unite resize image 
- 
+    async lang context

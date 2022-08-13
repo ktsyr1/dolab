@@ -9,11 +9,13 @@ export default function Forms(props) {
     let { send, title, sendContext = 'send ', formStyle, type } = props
     let classOne = props.classes ? '.' + props.classes : ''
     let close = () => document.querySelector('.forms' + classOne)?.classList.toggle('none')
+    let style = {
+        box: type ? { width: '100%', height: '100%', right: 0, top: 0, } : { right: 0, top: 0 },
+        sh: { width: '100%', height: '100%', backdropFilter: 'blur(10px)' }
+    }
     return (
-        <div className={`forms m-auto box alignX alignY ${props.classes} ${type ? type : 'pup none'}`}
-            style={type ? { width: '100%', height: '100%', right: 0, top: 0, } : { right: 0, top: 0 }}
-        >
-            {!type ? <div style={{ width: '100%', height: '100%', backdropFilter: 'blur(10px)' }} /> : ''}
+        <div className={`forms m-auto box alignX alignY ${props.classes} ${type ? type : 'pup none'}`} style={style.box} >
+            {!type ? <div style={sh} /> : ''}
 
             <div id="forms" className={`box col ui ${props.classes} ${type}`} style={formStyle}>
 

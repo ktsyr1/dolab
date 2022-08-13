@@ -1,13 +1,12 @@
 
 
-import { Input } from "/lib";
+import { Input, Title } from "/lib";
 import Head from "next/head";
 import cookie from "cookie";
 import { Component, useContext, useState } from "react";
-import Forms from "/Component/theme/forms";
-import BrindContext from "/Component/context/brind";
+import Forms from "/theme/forms";
+import BrindContext from "/lib/context/brind";
 import { PencilOutline, TrashOutline } from "react-ionicons";
-import { Title } from "../../lib";
 // nextjs useing routes 
 
 export default class BrindsPage extends Component {
@@ -35,8 +34,8 @@ export default class BrindsPage extends Component {
                     <Title title={Text.brinds} ui >
                         <button className="btn " onClick={this.context.open}>{Text.add_brind}</button>
                     </Title>
-                    <Forms title={Text.add_brind}  >
-                        <Input type="text" name="name" placeholder={Text.name} title={Text.name} />
+                    <Forms title={Text.add_brind} >
+                        <Input name="name" placeholder={Text.name} />
                     </Forms>
                     <Forms classes='FormEdit' title={Text.edit_brind} >
                         <Input type="text" name="name" placeholder={Text.name} title={Text.name} defaultValue={name} />
@@ -116,7 +115,7 @@ function Table({ updateOne, open }) {
     }
 }
 function VerifyDelete({ data, open, Delete }) {
-    let { Text } = useContext(BrindContext) 
+    let { Text } = useContext(BrindContext)
     return (
         <div className={'pup none forms m-auto box alignX alignY VerifyDelete '} style={{
             width: '100%', height: '100%', right: 0, top: 0

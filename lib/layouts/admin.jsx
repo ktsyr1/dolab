@@ -1,6 +1,6 @@
-import MenuAdmin from "/Component/theme/menu.admin";
-import Footer from "../theme/footer";
-import Nav from "../theme/nav";
+import MenuAdmin from "/theme/menu.admin";
+import Footer from "/theme/footer";
+import Nav from "/theme/nav";
 
 
 export default function LayoutAdmin({ children }, { props }) {

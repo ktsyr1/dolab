@@ -2,8 +2,24 @@ import { Input } from "/lib";
 import { Link } from "/lib";
 import Head from "next/head";
 import cookie from "cookie";
+import { useRouter } from "next/router";
 
 export default function Login({ Text }) {
+    let route = useRouter()
+    let { query } = route
+    function Send() {
+        // set token to cookie
+        document.cookie = cookie.serialize("token", "123456789", {
+            maxAge: 60 * 60 * 24 * 7,
+            path: "/",
+            sameSite: "strict",
+            secure: true
+        });
+        // reload
+        if (query?.back) return route.replace(query?.back)
+        else return route.reload('/')
+    }
+
     return (
         <div className="box alignX">
             <Head>
@@ -14,7 +30,7 @@ export default function Login({ Text }) {
                 <Input type='email' name='email' placeholder="username@mail.com" title={Text.email} />
                 <Input type='password' name='password' title={Text.password} />
                 <Link href={'/auth/repassword'} className='p' style={{ display: 'flex', justifyContent: 'flex-end' }} >{Text.forgot_password}</Link>
-                <button className="btn" >{Text.login}</button>
+                <button className="btn" onClick={Send} >{Text.login}</button>
             </from>
         </div >
     )

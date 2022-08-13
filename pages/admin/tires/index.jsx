@@ -3,7 +3,7 @@ import { Input } from "/lib";
 import { Link } from "/lib";
 import Head from "next/head";
 import cookie from "cookie";
-import Forms from "/Component/theme/forms";
+import Forms from "/theme/forms";
 import { Title } from "/lib";
 
 export default function Tires({ tires, Text }) {

@@ -8,11 +8,11 @@ export default function MenuAdmin() {
         'tires',
         // 'appointments',
         // 'users',
-        'categories', 'brinds'
+        'categories', 'brinds','maker'
     ]
     return (
-        <div className="box row w-12 m-4 sm-none menu_admin">
-            <div className="box col pup">
+        <div className="box row w-12  m-4 sm-none menu_admin">
+            <div className="box col pup ui w-10 R-m">
                 <b className=" b-r p"  >{lang.dashborad}</b>
                 {menu.map(a => {
                     return (
@@ -28,14 +28,7 @@ export default function MenuAdmin() {
                     href={'/admin/lang'}
                     className="p"
                     style={{ color: 'var(--color-ui)' }}
-                >{lang.lang}</Link>
-                <hr />
-                <Link
-                    href={"/" + locale === 'ar' ? 'en' : locale}
-                    className="p"
-                    style={{ color: 'var(--color-ui)' }}
-                // locale={locale === 'ar' ? locale : 'en'}
-                > {locale === 'ar' ? 'en' : locale}</Link>
+                >{lang.lang}</Link> 
             </div>
         </div>
     )

@@ -1,10 +1,8 @@
 
-import { Input } from "/lib";
-import { Link } from "/lib";
+import { Input, Link, InputLines, Title } from "/lib";
 import Head from "next/head";
 import cookie from "cookie";
-import Forms from "/Component/theme/forms";
-import { Title } from "/lib";
+import Forms from "/theme/forms";
 import { useEffect, useState } from "react";
 import { LangContext } from "/lib";
 import Image from "next/image";
@@ -68,8 +66,8 @@ export default function Tires({ lang }) {
                             <Input type='text' name='brind' placeholder="BMW" title='Brind' style={{ width: '20rem' }} />
                             <Input type='text' name='model' title='Model' style={{ width: '20rem' }} />
                             <Input type='text' name='location' placeholder="0" title='Location' style={{ width: '20rem' }} />
-                            <Input type='text' name='private' placeholder="0" title='private Notes' style={{ width: '20rem' }} />
-                            <Input type='text' name='public' placeholder="0" title='public Notes' style={{ width: '20rem' }} />
+                            <InputLines type='text' name='private' placeholder="0" title='private Notes' style={{ width: '20rem' }} />
+                            <InputLines type='text' name='public' placeholder="0" title='public Notes' style={{ width: '20rem' }} />
 
                         </div>
                         <div className='box col'>
@@ -122,5 +120,5 @@ export async function getServerSideProps({ req, locale }) {
     let cookies = cookie.parse(req?.headers?.cookie || '')
     let lang = LangContext(locale)
     if (!cookies?.token) return { redirect: { destination: '/auth/login?back=/admin/tires', permanent: true } }
-    else return { props: {lang:lang} }
+    else return { props: { lang: lang } }
 } 

@@ -4,8 +4,8 @@ import { Input, Title } from "/lib";
 import Head from "next/head";
 import cookie from "cookie";
 import { Component, useContext, useState } from "react";
-import Forms from "/Component/theme/forms";
-import BrindContext from "/Component/context/brind";
+import Forms from "/theme/forms";
+import BrindContext from "/lib/context/brind";
 import { PencilOutline, TrashOutline } from "react-ionicons";
 // nextjs useing routes 
 
