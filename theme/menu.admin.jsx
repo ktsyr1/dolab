@@ -8,7 +8,7 @@ export default function MenuAdmin() {
         'tires',
         // 'appointments',
         // 'users',
-        'categories', 'brinds','maker'
+        'categories', 'brands','maker'
     ]
     return (
         <div className="box row w-12  m-4 sm-none menu_admin">

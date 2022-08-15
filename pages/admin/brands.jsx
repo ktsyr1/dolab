@@ -5,17 +5,17 @@ import Head from "next/head";
 import cookie from "cookie";
 import { Component, useContext, useState } from "react";
 import Forms from "/theme/forms";
-import BrindContext from "/lib/context/brind";
+import BrandContext from "/lib/context/brand";
 import { PencilOutline, TrashOutline } from "react-ionicons";
 // nextjs useing routes 
 
-export default class BrindsPage extends Component {
+export default class BrandsPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: props.brinds,
+            data: props.brands,
             One: null,
-            title: 'add brind',
+            title: 'add brand',
             Text: props.Text,
         };
     }
@@ -33,28 +33,28 @@ export default class BrindsPage extends Component {
                 .map(e => document.querySelector(e)?.classList.toggle('none'))
         }
         return (
-            <BrindContext.Provider value={this.state}>
+            <BrandContext.Provider value={this.state}>
                 <div className="box col w-full  ">
                     <Head>
-                        <title>{Text.brinds}</title>
+                        <title>{Text.brands}</title>
                     </Head>
 
-                    <Title title={Text.brinds} ui >
-                        <button className="btn " onClick={open}>{Text.add_brind}</button>
+                    <Title title={Text.brands} ui >
+                        <button className="btn " onClick={open}>{Text.add_brand}</button>
                     </Title>
-                    <Forms classes='Formadd' title={Text.add_brind} send={open} close={open}  >
+                    <Forms classes='Formadd' title={Text.add_brand} send={open} close={open}  >
                         <Input name="name" placeholder={Text.name} />
                     </Forms>
-                    <Forms title={Text.edit_brind} send={openE} close={openE}  >
+                    <Forms title={Text.edit_brand} send={openE} close={openE}  >
                         <Input type="text" name="name" placeholder={Text.name} title={Text.name} defaultValue={name} />
                     </Forms>
                     <Table data={this.state.data} updateOne={updateOne} />
                 </div>
-            </BrindContext.Provider >
+            </BrandContext.Provider >
         );
     }
 }
-BrindsPage.contextType = BrindContext;
+BrandsPage.contextType = BrandContext;
 
 
 export function List({ data, classNames, onDelete, onEdit }) {
@@ -81,7 +81,7 @@ export function List({ data, classNames, onDelete, onEdit }) {
     )
 }
 function Table({ updateOne, open }) {
-    let Context = useContext(BrindContext);
+    let Context = useContext(BrandContext);
     let [_data, setData] = useState(Context.data);
     let [One, setOne] = useState(null)
     if (_data?.length > 0) {
@@ -123,7 +123,7 @@ function Table({ updateOne, open }) {
     }
 }
 function VerifyDelete({ data, open, Delete }) {
-    let { Text } = useContext(BrindContext)
+    let { Text } = useContext(BrandContext)
     return (
         <div className={'pup none forms m-auto box alignX alignY VerifyDelete '} style={{
             width: '100%', height: '100%', right: 0, top: 0
@@ -131,7 +131,7 @@ function VerifyDelete({ data, open, Delete }) {
             <div style={{ width: '100%', height: '100%', backdropFilter: 'blur(10px)' }} />
 
             <div id="forms" className=" box col ui pup m-auto" >
-                <p className="m-auto p-5" >{Text?.delete_for_brind} <b>{data.name}</b> </p>
+                <p className="m-auto p-5" >{Text?.delete_for_brand} <b>{data.name}</b> </p>
                 <div className="box row">
                     <button className="btn w-full m diseble" onClick={open}>{Text?.close}</button>
                     <button className="btn w-full m" onClick={Delete}>{Text?.delete}</button>
@@ -145,10 +145,10 @@ function VerifyDelete({ data, open, Delete }) {
 export async function getServerSideProps({ req, locale }) {
     let cookies = cookie.parse(req?.headers?.cookie || '')
     let Text = await import('/lib/lang.json')
-    if (!cookies?.token) return { redirect: { destination: '/auth/login?back=/admin/brinds', permanent: true } }
-    else return { props: { brinds, Text: Text[locale.slice(0, 2)] } }
+    if (!cookies?.token) return { redirect: { destination: '/auth/login?back=/admin/brands', permanent: true } }
+    else return { props: { brands, Text: Text[locale.slice(0, 2)] } }
 }
-let brinds = [
+let brands = [
     { id: 1, name: 'BMW' },
     { id: 2, name: 'Audi' },
     { id: 3, name: 'Mercedes' },

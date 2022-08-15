@@ -63,7 +63,7 @@ export default function Tires({ lang }) {
                         <div className='box col'>
                             <b>basic information</b>
                             <hr />
-                            <Input type='text' name='brind' placeholder="BMW" title='Brind' style={{ width: '20rem' }} />
+                            <Input type='text' name='brand' placeholder="BMW" title='Brand' style={{ width: '20rem' }} />
                             <Input type='text' name='model' title='Model' style={{ width: '20rem' }} />
                             <Input type='text' name='location' placeholder="0" title='Location' style={{ width: '20rem' }} />
                             <InputLines type='text' name='private' placeholder="0" title='private Notes' style={{ width: '20rem' }} />

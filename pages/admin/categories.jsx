@@ -5,13 +5,13 @@ import Head from "next/head";
 import cookie from "cookie";
 import { Component, useContext, useState } from "react";
 import Forms from "/theme/forms";
-import BrindContext from "/lib/context/brind";
+import BrandContext from "/lib/context/brand";
 import { PencilOutline, TrashOutline } from "react-ionicons";
 import { DataGrid } from '@mui/x-data-grid';
 
 // nextjs useing routes 
 
-export default class BrindsPage extends Component {
+export default class BrandsPage extends Component {
     constructor(props) {
         super(props);
         let data = []
@@ -47,7 +47,7 @@ export default class BrindsPage extends Component {
                 .map(e => document.querySelector(e)?.classList.toggle('none'))
         }
         return (
-            <BrindContext.Provider value={this.state}>
+            <BrandContext.Provider value={this.state}>
                 <div className="box col w-full  ">
                     <Head>
                         <title>{Text.categories}</title>
@@ -63,11 +63,11 @@ export default class BrindsPage extends Component {
                     </Forms>
                     <Table data={this.state.data} updateOne={updateOne} edit={openE} />
                 </div>
-            </BrindContext.Provider >
+            </BrandContext.Provider >
         );
     }
 }
-BrindsPage.contextType = BrindContext;
+BrandsPage.contextType = BrandContext;
 
 
 export function List({ data, classNames, onDelete, onEdit }) {
@@ -94,7 +94,7 @@ export function List({ data, classNames, onDelete, onEdit }) {
     )
 }
 function Table({ updateOne, open, edit }) {
-    let Context = useContext(BrindContext);
+    let Context = useContext(BrandContext);
     let [_data, setData] = useState(Context.data);
     let [One, setOne] = useState(null)
     if (_data?.length > 0) {
@@ -134,7 +134,7 @@ function Table({ updateOne, open, edit }) {
     }
 }
 function VerifyDelete({ data, open, Delete }) {
-    let { Text } = useContext(BrindContext)
+    let { Text } = useContext(BrandContext)
     return (
         <div className={'pup none forms m-auto box alignX alignY VerifyDelete '} style={{
             width: '100%', height: '100%', right: 0, top: 0
@@ -156,7 +156,7 @@ function VerifyDelete({ data, open, Delete }) {
 export async function getServerSideProps({ req, locale }) {
     let cookies = cookie.parse(req?.headers?.cookie || '')
     let Text = await import('/lib/lang.json')
-    if (!cookies?.token) return { redirect: { destination: '/auth/login?back=/admin/brinds', permanent: true } }
+    if (!cookies?.token) return { redirect: { destination: '/auth/login?back=/admin/brands', permanent: true } }
     else return { props: { categories, Text: Text[locale.slice(0, 2)] } }
 }
 
@@ -169,7 +169,7 @@ let categories = [
     { id: 6, name: 'Appointments' },
     { id: 7, name: 'Users' },
     { id: 8, name: 'Category', },
-    { id: 9, name: 'Brinds' },
+    { id: 9, name: 'Brands' },
     { id: 10, name: 'Products' },
     { id: 11, name: 'New' },
     { id: 12, name: 'Used' },
@@ -179,6 +179,6 @@ let categories = [
     { id: 16, name: 'Appointments' },
     { id: 17, name: 'Users' },
     { id: 18, name: 'Category', },
-    { id: 19, name: 'Brinds' },
+    { id: 19, name: 'Brands' },
     { id: 20, name: 'Products' },
 ] 

@@ -21,7 +21,7 @@ export default function Tires({ tires, Text }) {
             </Title>
             <div>
                 {tires?.map((tire, i) => {
-                    return <p className="p m w-full ui" key={i}> {tire.Brind}</p>
+                    return <p className="p m w-full ui" key={i}> {tire.Brand}</p>
 
                 })}
             </div>
@@ -36,10 +36,10 @@ export async function getServerSideProps({ req, locale }) {
     else return { props: { tires, Text: Text[locale.slice(0, 2)] } }
 }
 let tires = [
-    { "Brind": "bmw", "Model": "1999", "Location": "tt", "type": "tt", "private": "tt", "public": "0", "width": "120", "aspect": "10", "Rim": "20", "speed": "100", "Tread": "lk", "stock": "kl", "Cost": "kl", "Wholesale": "lk", "Retail": "lk", "icon": "kl", "images": "lk" },
-    { "Brind": "bmw", "Model": "2000", "Location": "tt", "type": "tt", "private": "tt", "public": "0", "width": "120", "aspect": "10", "Rim": "20", "speed": "100", "Tread": "lk", "stock": "kl", "Cost": "kl", "Wholesale": "lk", "Retail": "lk", "icon": "kl", "images": "lk" },
-    { "Brind": "jeep", "Model": "1999", "Location": "tt", "type": "tt", "private": "tt", "public": "0", "width": "120", "aspect": "10", "Rim": "20", "speed": "100", "Tread": "lk", "stock": "kl", "Cost": "kl", "Wholesale": "lk", "Retail": "lk", "icon": "kl", "images": "lk" },
-    { "Brind": "bmw", "Model": "1999", "Location": "tt", "type": "tt", "private": "tt", "public": "0", "width": "120", "aspect": "10", "Rim": "20", "speed": "100", "Tread": "lk", "stock": "kl", "Cost": "kl", "Wholesale": "lk", "Retail": "lk", "icon": "kl", "images": "lk" },
-    { "Brind": "bmw", "Model": "1999", "Location": "tt", "type": "tt", "private": "tt", "public": "0", "width": "120", "aspect": "10", "Rim": "20", "speed": "100", "Tread": "lk", "stock": "kl", "Cost": "kl", "Wholesale": "lk", "Retail": "lk", "icon": "kl", "images": "lk" },
+    { "Brand": "bmw", "Model": "1999", "Location": "tt", "type": "tt", "private": "tt", "public": "0", "width": "120", "aspect": "10", "Rim": "20", "speed": "100", "Tread": "lk", "stock": "kl", "Cost": "kl", "Wholesale": "lk", "Retail": "lk", "icon": "kl", "images": "lk" },
+    { "Brand": "bmw", "Model": "2000", "Location": "tt", "type": "tt", "private": "tt", "public": "0", "width": "120", "aspect": "10", "Rim": "20", "speed": "100", "Tread": "lk", "stock": "kl", "Cost": "kl", "Wholesale": "lk", "Retail": "lk", "icon": "kl", "images": "lk" },
+    { "Brand": "jeep", "Model": "1999", "Location": "tt", "type": "tt", "private": "tt", "public": "0", "width": "120", "aspect": "10", "Rim": "20", "speed": "100", "Tread": "lk", "stock": "kl", "Cost": "kl", "Wholesale": "lk", "Retail": "lk", "icon": "kl", "images": "lk" },
+    { "Brand": "bmw", "Model": "1999", "Location": "tt", "type": "tt", "private": "tt", "public": "0", "width": "120", "aspect": "10", "Rim": "20", "speed": "100", "Tread": "lk", "stock": "kl", "Cost": "kl", "Wholesale": "lk", "Retail": "lk", "icon": "kl", "images": "lk" },
+    { "Brand": "bmw", "Model": "1999", "Location": "tt", "type": "tt", "private": "tt", "public": "0", "width": "120", "aspect": "10", "Rim": "20", "speed": "100", "Tread": "lk", "stock": "kl", "Cost": "kl", "Wholesale": "lk", "Retail": "lk", "icon": "kl", "images": "lk" },
 
 ]
