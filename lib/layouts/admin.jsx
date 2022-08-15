@@ -5,14 +5,14 @@ import Nav from "/theme/nav";
 
 export default function LayoutAdmin({ children }, { props }) {
     return (
-        <>
-            <Nav />
-
-            <section className="box row">
-                <MenuAdmin />
-                <min className='box alignX w-full' >{children}</min>
-            </section>
-            <Footer />
-        </>
+        <div className="box row">
+            <MenuAdmin />
+            <div className="box col w-full">
+                <Nav />
+                <section className="box row p">
+                    <min className='box alignX w-full' >{children}</min>
+                </section> 
+            </div>
+        </div>
     )
 }

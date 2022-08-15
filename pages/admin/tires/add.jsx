@@ -100,7 +100,7 @@ export default function Tires({ lang }) {
                                     //  - formats png, jpg, gif, svg
                                     accept="image/png, image/jpeg, image/gif"
                                 />
-                                <Image src={icon} width='200px' height='200px' loading="lazy" alt="icon tires" />
+                                {/* <Image src={icon} width='200px' height='200px' loading="lazy" alt="icon tires" /> */}
                             </div>
                             <hr />
                             <div className='box col alignX '>

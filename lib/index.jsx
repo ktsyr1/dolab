@@ -4,6 +4,7 @@ import Links from 'next/link'
 import { useRouter } from 'next/router'
 import lang_data from '/lib/lang.json'
 
+import styled from "styled-components"
 export default function defaults() {
     return <div className='box col m-2'> test </div>
 }
@@ -11,11 +12,25 @@ export function Input(props) {
     let { locale } = useRouter()
     let lang = LangContext(locale)
     let title = props?.title ? props.title : lang[props.name]
+    let Box = styled.div`
+        height: 80px;
+        padding-top: 10px;
+        p{
+            margin: 0 0 -25px 0;
+            z-index: 1;
+            background-color: #fff;
+            padding: 0px 15px;
+            width: min-content;
+            border-radius: 10px;
+            overflow: hidden;
+            white-space: pre;
+    }
+    `
     return (
-        <div className='box col m-2'>
+        <Box className='box col m-2'>
             <p>{title}</p>
             <input type={props.type ? props.type : 'text'} {...props} />
-        </div>
+        </Box>
     )
 }
 

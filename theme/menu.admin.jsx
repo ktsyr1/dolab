@@ -8,27 +8,30 @@ export default function MenuAdmin() {
         'tires',
         // 'appointments',
         // 'users',
-        'categories', 'brands','maker'
+        'categories', 'brands', 'maker'
     ]
     return (
-        <div className="box row w-12  m-4 sm-none menu_admin">
-            <div className="box col pup ui w-10 R-m">
-                <b className=" b-r p"  >{lang.dashborad}</b>
-                {menu.map(a => {
-                    return (
-                        <Link
-                            href={'/admin/' + a}
-                            className="p"
-                            style={{ color: 'var(--color-ui)' }}
-                            key={a}
-                        >{lang[a]}</Link>
-                    )
-                })}
-                <Link
-                    href={'/admin/lang'}
-                    className="p"
-                    style={{ color: 'var(--color-ui)' }}
-                >{lang.lang}</Link> 
+        <div className="box row w-12 sm-none menu_admin">
+            <div className="box col   ui w-11 R-m" style={{ height: '-webkit-fill-available', position: 'fixed' }}>
+                <b className=" b-r p-5"  >{lang.dashborad}</b>
+                <div className="box col  R" style={{ height: '-webkit-fill-available', overflowY: 'scroll' }}>
+
+                    {menu.map(a => {
+                        return (
+                            <Link
+                                href={'/admin/' + a}
+                                className="p"
+                                style={{ color: 'var(--color-ui)' }}
+                                key={a}
+                            >{lang[a]}</Link>
+                        )
+                    })}
+                    <Link
+                        href={'/admin/lang'}
+                        className="p"
+                        style={{ color: 'var(--color-ui)' }}
+                    >{lang.lang}</Link>
+                </div>
             </div>
         </div>
     )

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Cookie from 'js-cookie'
 import { useRouter } from "next/router";
 import { LangContext, Link } from "/lib"
+import MenuAdmin from "./menu.admin";
 
 export default function Nav() {
     function open() {
@@ -14,7 +15,7 @@ export default function Nav() {
         document.querySelector('.menu_admin')?.classList.toggle('sm-none')
     }
     return (
-        <nav className="R-m alignX-full alignY box  sh pup ">
+        <nav className="R-m alignX-full alignY box pup sh ">
             {/* btn menu */}
             <div className="sm-box md-box  m" onClick={open}>
                 <MenuOutline title={'menu'} color={'#00000'} height="40px" width="40px" />
@@ -48,7 +49,7 @@ function Menu({ open }) {
                     let { href, content, className } = a
                     return (
                         <Link href={href} key={href} className={" p-4 sm-w-full " + (className ? className : '')} style={a?.style}  >
-                            {content}
+                            <b> {content} </b>                        
                         </Link>
                     )
                 })}
@@ -85,7 +86,7 @@ function Languages({ asPath, locale }) {
             </svg>
 
 
-            <p className="p">{Context}</p>
+            <b className="p">{Context}</b>
         </Link>
     )
 }
@@ -121,11 +122,11 @@ function AuthItems() {
             < >
                 <Link href='#' className='box row alignY' >
                     <PersonOutline color={'#00000'} title={'profile'} height="30px" width="30px" />
-                    <p className="p-3">{lang?.profile}</p>
+                    <b className="p-3">{lang?.profile}</b>
                 </Link>
                 <Link href='/admin' className='box row alignY' >
                     <GridOutline color={'#00000'} title={'admin'} height="40px" width="40px" />
-                    <p className="p-3">{lang?.dashboard}</p>
+                    <b className="p-3">{lang?.dashboard}</b>
 
                 </Link>
             </>

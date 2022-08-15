@@ -1,5 +1,6 @@
 import { useRouter } from "next/router"
 import { LangContext, Link } from "/lib"
+import styled from "styled-components"
 
 /**
  * 
@@ -41,5 +42,40 @@ export default function Forms(props) {
                 </div>
             </div>
         </div >
+    )
+}
+
+let Box = styled.div`
+    height: 80px;
+    padding-top: 10px;
+    p{
+        margin: 0 0 -10px 0;
+        z-index: 1;
+        background-color: #fff;
+        padding: 0px 15px;
+        width: min-content;
+        border-radius: 10px;
+        overflow: hidden;
+        white-space: pre;
+    }
+    `
+export function Input(props) {
+    let { locale } = useRouter()
+    let lang = LangContext(locale)
+    let title = props?.title ? props.title : lang[props.name]
+    return (
+        <Box className='box col m-2'>
+            <p>{title}</p>
+            <input type={props.type ? props.type : 'text'} {...props}  />
+        </Box>
+    )
+}
+
+export function InputLines(props) {
+    return (
+        <Box className='box col m-2'>
+            <p>{props.title}</p>
+            <textarea type={props.type ? props.type : 'text'} {...props} />
+        </Box>
     )
 }
