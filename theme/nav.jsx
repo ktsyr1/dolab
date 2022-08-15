@@ -33,15 +33,13 @@ export default function Nav() {
 }
 
 function Menu({ open }) {
-    let { locale, asPath } = useRouter()
-
+    let { locale } = useRouter()
     let lang = LangContext(locale)
     let data = [
         { content: lang?.home, href: '/' },
         { content: lang?.product, href: '/#' },
         { content: lang?.about, href: '/?' }
     ]
-    useEffect(() => { }, [])
     return (
         <div className=" menu box row sm-pup sm-col sm-sh sm-none md-pup md-col md-sh md-none lg-none lg-pup lg-col lg-sh alignY alignY-full right-0" >
             <div className="box sm-col sm-sh md-col md-sh sm-w-full md-w-full lg-col lg-sh lg-w-full alignY" onClick={open}>
@@ -53,7 +51,7 @@ function Menu({ open }) {
                         </Link>
                     )
                 })}
-                <Languages />
+                {/* <Languages /> */}
             </div>
             <div className="box row sm-col md-col lg-col sm-w-full md-w-full lg-w-full" onClick={open} >
                 <AuthItems />
@@ -64,7 +62,7 @@ function Menu({ open }) {
 function Languages() {
     let { asPath, locale } = useRouter()
     return (
-        <Link className='sm-w-full box alignY ' href={asPath} locale={locale !== 'en' ? 'en' : 'ar'} style={{padding:'0 10px '}} >
+        <Link className='sm-w-full box alignY ' href={asPath} locale={locale !== 'en' ? 'en' : 'ar'} style={{ padding: '0 10px ' }} >
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40 40">
                 <g transform="translate(-234 -136.388)">
                     <g transform="translate(234 136.388)" fill="#fff" stroke="#ff7070" stroke-width="1">

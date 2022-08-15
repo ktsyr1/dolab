@@ -11,7 +11,6 @@ export function Input(props) {
     let { locale } = useRouter()
     let lang = LangContext(locale)
     let title = props?.title ? props.title : lang[props.name]
-    console.log(lang[props.type]);
     return (
         <div className='box col m-2'>
             <p>{title}</p>
@@ -30,7 +29,7 @@ export function InputLines(props) {
 }
 export function Link({ href, children, className, style, locale }) {
     return (
-        <Links href={href || "#"} lang='en' locale={locale}>
+        <Links href={href || "#"} locale={locale}>
             <a className={className || ''} style={style}>
                 {children}
             </a>
@@ -40,7 +39,7 @@ export function Link({ href, children, className, style, locale }) {
 
 export function Title(props) {
 
-    let { title, close, className, style, btns, btn, tag, ui, border } = props
+    let { title, className, style, ui } = props
     return (
         <div className={`Title box row alignY ${className ? className : ''} ${ui ? 'ui' : ''} `} style={style}>
             {title ? <h1 className='m'>{title}</h1> : ""}
