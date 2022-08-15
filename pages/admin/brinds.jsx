@@ -24,6 +24,14 @@ export default class BrindsPage extends Component {
         let updateOne = (newData) => { this.setState({ One: newData }); }
         let { Text } = this.state
         let name = this.state?.One?.name
+        function open() {
+            ['.Formadd.forms', '.Formadd #forms']
+                .map(e => document.querySelector(e)?.classList.toggle('none'))
+        }
+        function openE() {
+            ['.FormEdit.forms', '.FormEdit #forms']
+                .map(e => document.querySelector(e)?.classList.toggle('none'))
+        }
         return (
             <BrindContext.Provider value={this.state}>
                 <div className="box col w-full  ">
@@ -32,12 +40,12 @@ export default class BrindsPage extends Component {
                     </Head>
 
                     <Title title={Text.brinds} ui >
-                        <button className="btn " onClick={this.context.open}>{Text.add_brind}</button>
+                        <button className="btn " onClick={open}>{Text.add_brind}</button>
                     </Title>
-                    <Forms title={Text.add_brind} >
+                    <Forms classes='Formadd' title={Text.add_brind} send={open} close={open}  >
                         <Input name="name" placeholder={Text.name} />
                     </Forms>
-                    <Forms classes='FormEdit' title={Text.edit_brind} >
+                    <Forms title={Text.edit_brind} send={openE} close={openE}  >
                         <Input type="text" name="name" placeholder={Text.name} title={Text.name} defaultValue={name} />
                     </Forms>
                     <Table data={this.state.data} updateOne={updateOne} />

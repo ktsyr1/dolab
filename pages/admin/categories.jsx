@@ -7,13 +7,19 @@ import { Component, useContext, useState } from "react";
 import Forms from "/theme/forms";
 import BrindContext from "/lib/context/brind";
 import { PencilOutline, TrashOutline } from "react-ionicons";
+import { DataGrid } from '@mui/x-data-grid';
+
 // nextjs useing routes 
 
 export default class BrindsPage extends Component {
     constructor(props) {
         super(props);
+        let data = []
+        props.categories.map((name, i) => {
+            data.push({ id: i, name: name.name })
+        })
         this.state = {
-            data: props.categories,
+            data,
             One: null,
             Text: props.Text,
         };
@@ -21,8 +27,25 @@ export default class BrindsPage extends Component {
     render() {
         // let update = (newData) => this.setState({ data: newData })
         let updateOne = (newData) => { this.setState({ One: newData }); }
+        let updateOne2 = (e) => {
+            this.setState({ One: e });
+        }
         let { Text } = this.state
         let name = this.state?.One?.name
+
+
+        const columns = [
+            { field: 'name', headerName: Text.name, width: 150, editable: true },
+        ];
+        console.log(this.state)
+        function open() {
+            ['.Formadd.forms', '.Formadd #forms']
+                .map(e => document.querySelector(e)?.classList.toggle('none'))
+        }
+        function openE() {
+            ['.FormEdit.forms', '.FormEdit #forms']
+                .map(e => document.querySelector(e)?.classList.toggle('none'))
+        }
         return (
             <BrindContext.Provider value={this.state}>
                 <div className="box col w-full  ">
@@ -30,12 +53,12 @@ export default class BrindsPage extends Component {
                         <title>{Text.categories}</title>
                     </Head>
                     <Title title={Text.categories} ui >
-                        <button className="btn " onClick={this.context.open}>{Text.add_category}</button>
+                        <button className="btn " onClick={open}>{Text.add_category}</button>
                     </Title>
-                    <Forms title={Text.add_category}  >
-                        <Input type="text" name="name" placeholder={Text.name} title={Text.name} />
+                    <Forms classes='Formadd' title={Text.add_category}  >
+                        <Input type="text" name="name" placeholder={Text.name} title={Text.name} send={open} close={open} />
                     </Forms>
-                    <Forms classes='FormEdit' title={Text.edit_category} >
+                    <Forms classes='FormEdit' title={Text.edit_category} send={openE} close={openE} >
                         <Input type="text" name="name" placeholder={Text.name} title={Text.name} defaultValue={name} />
                     </Forms>
                     <Table data={this.state.data} updateOne={updateOne} />

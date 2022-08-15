@@ -7,8 +7,9 @@ import Forms from "/theme/forms";
 import { PencilOutline, TrashOutline } from "react-ionicons";
 import axios from "axios";
 import { useRouter } from "next/router";
-import Table, { TableRow } from "../../theme/tables";
-
+// import Table, { TableRow } from "../../theme/tables";
+import { Space, Table, Tag } from 'antd';
+import 'antd/dist/antd.css'
 export default function Maker() {
     let { locale } = useRouter();
     let lang = LangContext(locale);
@@ -18,7 +19,20 @@ export default function Maker() {
         datas[e.target.name] = e.target.value;
         setData(datas);
     }
+    const dataSource = [
+        { id: '1', name: 'Mike', model: 32, address: '10 Downing Street', },
+        { id: '2', name: 'John', model: 42, address: '10 Downing Street', },
+    ];
+
+    const columns = [
+        { title: lang.name, dataIndex: 'name', key: 'name', },
+        { title: lang.model, dataIndex: 'model', key: 'model', },
+        { title: lang.versions, dataIndex: 'versions', key: 'models[0].model', },
+        { title: 'versions', dataIndex: 'versions', key: 'versions', },
+    ];
+
     console.log(data);
+
     return (
         <div className="box col w-full">
             <Head>
@@ -31,15 +45,9 @@ export default function Maker() {
                 <Input name="versions" title={lang.version} />
                 <button className="btn h-6 alignX">{lang.add}</button>
             </div>
-            <Table head={['name', 'model', "versions"]}>
-                {ArrayMaker.map(item => {
-                    let data = [item.name, item.models[0].model, item.models[0].versions];
-                    return (
-                        <TableRow data={item} />
-                    )
-                })}
-
-            </Table>
+            <div className="m">
+                <Table dataSource={ArrayMaker} columns={columns} />
+            </div>
         </div>
     );
 }
@@ -51,7 +59,10 @@ let ArrayMaker = [
     },
     {
         name: "werre we ree",
-        models: [{ model: "sad", versions: ["v1", 'v2'] }],
+        models: [
+            { model: "sdda", versions: ["v1", 'v2', 'v3'] },
+            { model: "sad", versions: ["v1", 'v2'] },
+        ],
     },
 
 ]

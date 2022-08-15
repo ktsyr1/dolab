@@ -6,26 +6,31 @@
  * 
  */
 export default function Forms(props) {
-    let { send, title, sendContext = 'send ', formStyle, type } = props
+    let { send, title, sendContext = 'send ', formStyle, type, close } = props
     let classOne = props.classes ? '.' + props.classes : ''
-    let close = () => document.querySelector('.forms' + classOne)?.classList.toggle('none')
+    let Close = close ? close : () => {
+        document.querySelector('.forms' + classOne)?.classList.toggle('none')
+        document.querySelector('#forms')?.classList.toggle('none')
+    }
     let style = {
-        box: type ? { width: '100%', height: '100%', right: 0, top: 0, } : { right: 0, top: 0 },
+        box: type
+            ? { width: '100%', height: '100%', right: 0, top: 0, }
+            : { right: 0, top: 0, zIndex: 1, width: '-webkit-fill-available', height: '-webkit-fill-available' },
         sh: { width: '100%', height: '100%', backdropFilter: 'blur(10px)' }
     }
     return (
         <div className={`forms m-auto box alignX alignY ${props.classes} ${type ? type : 'pup none'}`} style={style.box} >
-            {!type ? <div style={sh} /> : ''}
+            {!type ? <div style={style.sh} /> : ''}
 
-            <div id="forms" className={`box col ui ${props.classes} ${type}`} style={formStyle}>
+            <div id="forms" className={`box col ui ${props.classes} ${type ? type : 'pup none'}`} style={formStyle}>
 
                 <h2 className="box alignX m titles" >{title}</h2>
                 {/* props ccildren */}
 
                 {props.children}
                 <div className="box row alignX-end">
-                    {type == 'none pup' ? <button className="btn w-full diseble" onClick={close} style={{ margin: ' 0 10px' }}>close</button> : ''}
-                    <button className="btn w-full " style={{ maxWidth: '350px' }} onClick={send ? send : close}>{sendContext} </button>
+                    {!type ? <button className="btn w-full diseble" onClick={Close} style={{ margin: ' 0 10px' }}>close</button> : ''}
+                    <button className="btn w-full " style={{ maxWidth: '350px' }} onClick={send ? send : Close}>{sendContext} </button>
 
 
                 </div>
