@@ -1,3 +1,5 @@
+import { useRouter } from "next/router"
+import { LangContext, Link } from "/lib"
 
 /**
  * 
@@ -6,7 +8,10 @@
  * 
  */
 export default function Forms(props) {
-    let { send, title, sendContext = 'send ', formStyle, type, close } = props
+    //  lang
+    let { locale } = useRouter()
+    let lang = LangContext(locale)
+    let { send, title, sendContext = lang.send, formStyle, type, close } = props
     let classOne = props.classes ? '.' + props.classes : ''
     let Close = close ? close : () => {
         document.querySelector('.forms' + classOne)?.classList.toggle('none')
@@ -29,7 +34,7 @@ export default function Forms(props) {
 
                 {props.children}
                 <div className="box row alignX-end">
-                    {!type ? <button className="btn w-full diseble" onClick={Close} style={{ margin: ' 0 10px' }}>close</button> : ''}
+                    {!type ? <button className="btn w-full diseble" onClick={Close} style={{ margin: ' 0 10px' }}>{lang.close}</button> : ''}
                     <button className="btn w-full " style={{ maxWidth: '350px' }} onClick={send ? send : Close}>{sendContext} </button>
 
 

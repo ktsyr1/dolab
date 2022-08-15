@@ -48,7 +48,7 @@ export default class BrandsPage extends Component {
                     <Forms title={Text.edit_brand} send={openE} close={openE}  >
                         <Input type="text" name="name" placeholder={Text.name} title={Text.name} defaultValue={name} />
                     </Forms>
-                    <Table data={this.state.data} updateOne={updateOne} />
+                    <Table data={this.state.data} updateOne={updateOne} edit={openE} />
                 </div>
             </BrandContext.Provider >
         );
@@ -80,7 +80,7 @@ export function List({ data, classNames, onDelete, onEdit }) {
         </>
     )
 }
-function Table({ updateOne, open }) {
+function Table({ updateOne, open, edit }) {
     let Context = useContext(BrandContext);
     let [_data, setData] = useState(Context.data);
     let [One, setOne] = useState(null)
@@ -102,9 +102,7 @@ function Table({ updateOne, open }) {
 
                     let onEdit = () => {
                         updateOne(a)
-                        setTimeout(() => {
-                            document.querySelector('.FormEdit')?.classList.toggle('none')
-                        }, 500)
+                        setTimeout(() => edit(), 500)
                     }
                     let Delete = () => {
                         if (One === null) {
