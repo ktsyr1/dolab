@@ -48,7 +48,8 @@ export default function Forms(props) {
 let Box = styled.div`
     height: 80px;
     padding-top: 10px;
-    p{
+    `
+let P = styled.p` 
         margin: 0 0 -10px 0;
         z-index: 1;
         background-color: #fff;
@@ -56,8 +57,7 @@ let Box = styled.div`
         width: min-content;
         border-radius: 10px;
         overflow: hidden;
-        white-space: pre;
-    }
+        white-space: pre; 
     `
 export function Input(props) {
     let { locale } = useRouter()
@@ -65,8 +65,8 @@ export function Input(props) {
     let title = props?.title ? props.title : lang[props.name]
     return (
         <Box className='box col m-2'>
-            <p>{title}</p>
-            <input type={props.type ? props.type : 'text'} {...props}  />
+            <P>{title}</P>
+            <input type={props.type ? props.type : 'text'} {...props} />
         </Box>
     )
 }
@@ -74,7 +74,7 @@ export function Input(props) {
 export function InputLines(props) {
     return (
         <Box className='box col m-2'>
-            <p>{props.title}</p>
+            <P>{props.title}</P>
             <textarea type={props.type ? props.type : 'text'} {...props} />
         </Box>
     )

@@ -4,7 +4,7 @@ import Head from "next/head";
 import cookie from "cookie";
 import { Component, useContext, useState } from "react";
 import Forms, { Input } from "/theme/forms";
-import { AddCircleOutline, RemoveCircleOutline, PulseOutline, TrashOutline } from "react-ionicons";
+import { AddCircleOutline, RemoveCircleOutline, PulseOutline, TrashOutline, PencilOutline } from "react-ionicons";
 import axios from "axios";
 import { useRouter } from "next/router";
 // import Table, { TableRow } from "../../theme/tables";
@@ -14,30 +14,39 @@ export default function Maker() {
     let { locale } = useRouter();
     let lang = LangContext(locale);
     let [data, setData] = useState(ArrayMaker);
+    // one 
+    let [one, setOne] = useState({ name: '', models: [{ model: "", versions: [], id }] });
     function DeleteOne(e) {
         let id = e.id;
         let result = data.filter(item => item.id != id);
-        setData(result); 
+        setData(result);
     }
     let [id, setId] = useState(data.length);
-
+    function EditOne(e) {
+        console.log(e);
+    }
     const columns = [
         { title: lang.name, dataIndex: 'name', key: 'name', },
         { title: lang.model, dataIndex: 'model', key: 'model', },
         { title: lang.versions, dataIndex: 'versions', key: 'versions', },
         {
-            title: 'Action', dataIndex: '', key: 'x',
+            title: '', dataIndex: '', key: 'x',
             render: (_, record) => data.length >= 1 ? (
-                <Popconfirm title="Sure to delete?" onConfirm={() => DeleteOne(record)}>
-                    <a>Delete</a>
-                </Popconfirm>
-            ) : null, // <TrashOutline title={'Delete'} color={'#00000'} height="25px" width="25px" />
+                <div className="box row" >
+                    <div style={{ margin: '0 10px' }} onClick={() => EditOne(record)}>
+                        <PencilOutline title={'Delete'} color={'#00000'} height="25px" width="25px" />
+                    </div>
+                    <Popconfirm title={lang.sure_to_delete} onConfirm={() => DeleteOne(record)}>
+                        <TrashOutline title={'Delete'} color={'#00000'} height="25px" width="25px" />
+                    </Popconfirm>
+                </div>
+            ) : null, // 
         },
     ];
     function send(res) {
-        console.log(res);
         res['id'] = id + 1;
         setData([...data, res])
+        setId(id + 1)
     }
     return (
         <div className="box col w-full">
