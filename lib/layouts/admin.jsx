@@ -10,8 +10,8 @@ export default function LayoutAdmin({ children }, { props }) {
             <div className="box col w-full">
                 <Nav />
                 <section className="box row p">
-                    <min className='box alignX w-full' >{children}</min>
-                </section> 
+                    <div className='box alignX w-full' >{children}</div>
+                </section>
             </div>
         </div>
     )
