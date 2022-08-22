@@ -46,7 +46,7 @@ function Menu({ open, locale, asPath, lang }) {
                 {data.map(a => {
                     let { href, content, className } = a
                     return (
-                        <Link href={href} key={href} className={" p-4 sm-w-full " + (className ? className : '')} style={a?.style}  >
+                        <Link href={href} key={href} className={" p-4 sm-w-full  md-w-full  lg-w-full " + (className ? className : '')} style={a?.style}  >
                             <b> {content} </b>
                         </Link>
                     )
@@ -64,7 +64,7 @@ function Languages({ asPath, locale }) {
         let lang = 'en'
         let Context = 'English'
         return (
-            <Link className='sm-w-full box alignY ' href={asPath} locale={lang} style={{ padding: '0 10px ' }} >
+            <Link className='sm-w-full md-w-full lg-w-full  box alignY ' href={asPath} locale={lang} style={{ padding: '0 10px ' }} >
                 <Icon />
                 <b className="p">{Context}</b>
             </Link>
@@ -73,7 +73,7 @@ function Languages({ asPath, locale }) {
         let lang = 'ar'
         let Context = 'عربي'
         return (
-            <Link className='sm-w-full box alignY ' href={asPath} locale={lang} style={{ padding: '0 10px ' }} >
+            <Link className='sm-w-full md-w-full lg-w-full  box alignY ' href={asPath} locale={lang} style={{ padding: '0 10px ' }} >
                 <Icon />
                 <b className="p">{Context}</b>
             </Link>

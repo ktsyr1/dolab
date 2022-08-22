@@ -1,0 +1,11 @@
+{
+    "netlify.site_id": "https://dolab.netlify.app",
+    "netlify.api_token": "5uWkl6ThgXU2Z7ynG3Y9VQQxAMIYT8o2v2wDMENpEJg",
+    "netlify.set_interval": "10000",
+    "netlify.build_status_colors": {
+      "building": "<hex|name>",
+      "enqueued": "<hex|name>",
+      "deploy-successful": "<hex|name>",
+      "error": "<hex|name>"
+    }
+  }
