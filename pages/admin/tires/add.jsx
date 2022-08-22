@@ -10,36 +10,44 @@ export default function Tires({ lang }) {
     let [icon, setIcon] = useState('/_next/image?url=%2Fimages%2Flogo.png&w=64&q=75')
     // images
     let [images, setImages] = useState([]);
+    // data
+    let [data, setData] = useState([]); 
     let open = () => document.querySelector('.forms').classList.toggle('none')
     let style = {
         width: '-webkit-fill-available',
         maxWidth: '-webkit-fill-available',
     }
     useEffect(() => {
-
-        document.querySelector('[name=icon]').addEventListener('change', (e) => {
-            let file = e.target.files[0]
-            let reader = new FileReader()
-            reader.readAsDataURL(file)
-            console.log(file);
-            reader.onload = (e) => setIcon(e.target.result)
+        let imageSize = 300000
+        document.querySelector('[name]').addEventListener('change', (e) => { 
 
         })
+        document.querySelector('[name=icon]').addEventListener('change', (e) => {
+            let file = e.target.files[0]
+            if (file.size < imageSize) {
+                let reader = new FileReader()
+                reader.readAsDataURL(file)
+                console.log(file);
+                reader.onload = (e) => setIcon(e.target.result)
+            }
+        })
 
-
-        document.querySelector('[name=images]').addEventListener('change', (e) => {
+        document.querySelector('.[name=images]').addEventListener('change', (e) => {
             // images to base64 and push to array
             let files = e.target.files;
 
             function readAndPreview(file) {
                 // Make sure `file.name` matches our extensions criteria
-                if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
-                    const reader = new FileReader();
-                    let imgesSet = [...images];
-                    reader.onloadend = (a) => imgesSet.push(a.target.result)
-                    reader.onprogress = (b) => imgesSet.push(b.target.result)
-                    reader?.readAsDataURL(file);
-                    setImages(imgesSet)
+                if (file.size < imageSize) {
+
+                    if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                        const reader = new FileReader();
+                        let imgesSet = [...images];
+                        reader.onloadend = (a) => imgesSet.push(a.target.result)
+                        reader.onprogress = (b) => imgesSet.push(b.target.result)
+                        reader?.readAsDataURL(file);
+                        setImages(imgesSet)
+                    }
                 }
             }
             if (files) {
@@ -47,7 +55,16 @@ export default function Tires({ lang }) {
             }
         })
     }, [])
-    // console.log(images)
+    console.log(images)
+    function Send() {
+        // data form
+        let data = {}
+        Array
+            .from(document.querySelectorAll('.forms [name]'))
+            .map(e => data[e.name] = e.src || e.value)
+        console.log(data);
+    }
+
     return (
         <div className="box col w-full ">
             <Head>
@@ -56,7 +73,7 @@ export default function Tires({ lang }) {
             <Title title={lang.add_tire} ui />
 
             <div className="box grid alignX">
-                <Forms type=' ' formStyle={style} style={style} >
+                <Forms type=' ' send={Send} formStyle={style} style={style} >
 
 
                     <div className='box grid'>
@@ -90,7 +107,6 @@ export default function Tires({ lang }) {
                             </div>
                             <Input type='text' name='category' placeholder="New , Used , ..." title='tire type' style={{ width: '20rem' }} />
                         </div>
-
                         <div className='box col'>
                             <b>assets</b>
                             <hr />
@@ -100,7 +116,7 @@ export default function Tires({ lang }) {
                                     //  - formats png, jpg, gif, svg
                                     accept="image/png, image/jpeg, image/gif"
                                 />
-                                {/* <Image src={icon} width='200px' height='200px' loading="lazy" alt="icon tires" /> */}
+                                <Image src={icon} width='200px' height='200px' loading="lazy" alt="icon tires" />
                             </div>
                             <hr />
                             <div className='box col alignX '>
