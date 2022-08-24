@@ -8,7 +8,7 @@ export default function Home() {
                 <title>dolib app</title>
             </Head>
             <div className="box alignY alignX h-10 ui w-10  ">
-                content
+                content v day 8/25 
             </div>
         </div>
     )
