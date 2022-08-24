@@ -7,61 +7,73 @@ import { useEffect, useState } from "react";
 import { LangContext } from "/lib";
 import Image from "next/image";
 export default function Tires({ lang }) {
-    let [icon, setIcon] = useState('/_next/image?url=%2Fimages%2Flogo.png&w=64&q=75')
+    let { log } = console
     // images
+    let [icon, setIcon] = useState(['/_next/image?url=%2Fimages%2Flogo.png&w=64&q=75'])
     let [images, setImages] = useState([]);
     // data
-    let [data, setData] = useState([]); 
+    let [data, setData] = useState({});
+    let [imageSize, setImageSize] = useState(3000000)
+
     let open = () => document.querySelector('.forms').classList.toggle('none')
     let style = {
         width: '-webkit-fill-available',
         maxWidth: '-webkit-fill-available',
     }
-    useEffect(() => {
-        let imageSize = 300000
-        document.querySelector('[name]').addEventListener('change', (e) => { 
-
-        })
-        document.querySelector('[name=icon]').addEventListener('change', (e) => {
-            let file = e.target.files[0]
-            if (file.size < imageSize) {
-                let reader = new FileReader()
-                reader.readAsDataURL(file)
-                console.log(file);
-                reader.onload = (e) => setIcon(e.target.result)
-            }
-        })
-
-        document.querySelector('.[name=images]').addEventListener('change', (e) => {
-            // images to base64 and push to array
-            let files = e.target.files;
-
-            function readAndPreview(file) {
-                // Make sure `file.name` matches our extensions criteria
-                if (file.size < imageSize) {
-
-                    if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
-                        const reader = new FileReader();
-                        let imgesSet = [...images];
-                        reader.onloadend = (a) => imgesSet.push(a.target.result)
-                        reader.onprogress = (b) => imgesSet.push(b.target.result)
-                        reader?.readAsDataURL(file);
-                        setImages(imgesSet)
-                    }
-                }
-            }
-            if (files) {
-                Array.prototype.forEach.call(files, readAndPreview);
-            }
-        })
-    }, [])
-    console.log(images)
+    // console.log(images)
     function Send() {
-        // data form
-        let data = {}
-        Array
-            .from(document.querySelectorAll('.forms [name]'))
-            .map(e => data[e.name] = e.src || e.value)
+        // // data form
+        // let data = {}
+        // Array
+        //     .from(document.querySelectorAll('.forms [name]'))
+        //     .map(e => {
+        //         if (e.name === 'category') data['category'] = e.value.split(',')
+        //         if (e.name === 'icon') {
+        //             let file = e.files[0]
+        //             if (file?.size < imageSize) {
+        //                 console.log(file);
+        //                 let reader = new FileReader()
+        //                 reader.readAsDataURL(file)
+        //                 reader.onload = d => data['icon'] = d.target.result
+        //             }
+        //         }
+
+        //         else data[e.name] = e.value
+        //     })
+        let res = localStorage?.getItem('tires')
+        // res to json
+        let tires = res ? JSON.parse(res) : {}
+        if (tires.length > 0) localStorage.setItem('tires', JSON.stringify([data, ...tires]))
+        else localStorage.setItem('tires', JSON.stringify([data]))
+
+    }
+    function file2besic(file) {
+        console.log(file);
+        if (file?.size < imageSize) {
+            let reader = new FileReader()
+            reader.readAsDataURL(file)
+            return new Promise((resolve, reject) => {
+                reader.onload = d => resolve(d.target.result)
+            })
+        }
+    }
+    async function Changes(e) {
+        let { value, files, name } = e.target
+        let Data = data
+        function Map() {
+            let Files = Array.from(files)
+            return Promise
+                .all(Files?.map(async file => await file2besic(file)))
+                .then(res => res)
+        }
+        if (name === 'category') Data[name] = value.split(',')
+        if (name === 'icon') {
+            let res = await Map()
+            setIcon(res)
+        }
+        if (name === 'images') Data[name] = await Map()
+        else Data[name] = value
+        setData(Data)
         console.log(data);
     }
 
@@ -72,7 +84,7 @@ export default function Tires({ lang }) {
             </Head>
             <Title title={lang.add_tire} ui />
 
-            <div className="box grid alignX">
+            <div className="box grid alignX" onChange={Changes}>
                 <Forms type=' ' send={Send} formStyle={style} style={style} >
 
 
@@ -116,11 +128,21 @@ export default function Tires({ lang }) {
                                     //  - formats png, jpg, gif, svg
                                     accept="image/png, image/jpeg, image/gif"
                                 />
-                                <Image src={icon} width='200px' height='200px' loading="lazy" alt="icon tires" />
+                                <Image src={icon[0]} width='200px' height='200px' loading="lazy" alt="icon tires" />
                             </div>
                             <hr />
                             <div className='box col alignX '>
                                 <Input type='file' name='images' title='photos tires' style={{ width: '20rem' }} accept="image/png, image/jpeg, " multiple />
+                                <div className='box row scroll alignX ' style={{ width: '20rem' }}>
+
+                                    {data?.images?.map(file => {
+                                        log(file)
+                                        return (
+                                            <Image key={file} src={file} width='200px' height='200px' loading="lazy" alt={file} />
+                                        )
+
+                                    })}
+                                </div>
                             </div>
                         </div>
                     </div>

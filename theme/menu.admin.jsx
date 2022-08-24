@@ -11,7 +11,7 @@ export default function MenuAdmin() {
         'categories', 'brands', 'maker'
     ]
     return (
-        <div className="box row w-12 sm-none menu_admin">
+        <div className="box row w-12 sm-none  md-none  lg-none menu_admin">
             <div className="box col   ui w-11 R-m" style={{ height: '-webkit-fill-available', position: 'fixed' }}>
                 <b className=" b-r p-5"  >{lang.dashborad}</b>
                 <div className="box col  R" style={{ height: '-webkit-fill-available', overflowY: 'scroll' }}>

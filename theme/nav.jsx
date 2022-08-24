@@ -25,7 +25,7 @@ export default function Nav() {
                 <Image src={'/images/logo.png'} width={54} height={40} style={{ filter: 'drop-shadow(1px 1px 1px #FFFfff99)' }} />
             </Link>
             {/* menu */}
-            <Menu open={open} lang={lang} locale={locale} asPath={asPath} />
+            {/* <Menu open={open} lang={lang} locale={locale} asPath={asPath} /> */}
             {/* search */}
             <Link href='/search' className='sm-box md-box m'  >
                 <SearchOutline color={'#00000'} title={'Search'} height="40px" width="40px" />

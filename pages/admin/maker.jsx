@@ -8,7 +8,7 @@ import { AddCircleOutline, RemoveCircleOutline, PulseOutline, TrashOutline, Penc
 import axios from "axios";
 import { useRouter, withRouter } from "next/router";
 // import Table, { TableRow } from "../../theme/tables";
-import { Popconfirm, Table, Tag } from 'antd';
+import { Popconfirm, Table } from 'antd';
 import 'antd/dist/antd.css'
 
 export default class Maker extends Component {
@@ -179,8 +179,7 @@ export default class Maker extends Component {
                             defaultExpandedRowKeys: ['0'],
                         }}
                         pagination={false}
-                        bordered
-
+                        bordered 
                     />
                 </div>
             </div>
