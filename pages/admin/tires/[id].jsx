@@ -1,20 +1,23 @@
-
 import { Input, InputLines } from "/theme/forms";
-import { Link, Title } from "/lib";
-import Head from "next/head";
-import cookie from "cookie";
-import Forms from "/theme/forms";
-import { useEffect, useState } from "react";
-import { LangContext } from "/lib";
-import Image from "next/image";
+
+import { Link, Title } from "/lib"
+import Head from "next/head"
+import cookie from "cookie"
+import Forms from "/theme/forms"
+import { useEffect, useState } from "react"
+import { LangContext } from "/lib"
+import Image from "next/image"
+import 'antd/dist/antd.css'
+import { tires } from "."
 export default function Tires({ lang, dataDef = {} }) {
     // images  
+    let title = `${lang.edit} ${dataDef?.brand} ${dataDef?.model}`
     return (
         <div className="box col w-full ">
             <Head>
-                <title>{lang.add_tire}</title>
+                <title>{title}</title>
             </Head>
-            <Title title={lang.add_tire} ui />
+            <Title title={title} ui />
             <Form lang={lang} dataDef={dataDef} />
         </div >
     )
@@ -35,13 +38,8 @@ export function Form({ lang, dataDef = {} }) {
         let res = localStorage?.getItem('tires')
         // res to json
         let tires = res ? JSON.parse(res) : {}
-
-        let id = 1
-        tires?.map(a => a.id < id ? id = a.id + 1 : null)
-        let Data = data
-        Data['id'] = id
-        if (tires.length > 0) localStorage.setItem('tires', JSON.stringify([Data, ...tires]))
-        else localStorage.setItem('tires', JSON.stringify([Data]))
+        if (tires.length > 0) localStorage.setItem('tires', JSON.stringify([data, ...tires]))
+        else localStorage.setItem('tires', JSON.stringify([data]))
 
     }
     function file2besic(file) {
@@ -81,32 +79,32 @@ export function Form({ lang, dataDef = {} }) {
                     <div className='box col'>
                         <b>basic information</b>
                         <hr />
-                        <Input type='text' name='brand' placeholder="BMW" title='Brand' style={{ width: '20rem' }} />
-                        <Input type='text' name='model' title='Model' style={{ width: '20rem' }} />
-                        <Input type='text' name='location' placeholder="0" title='Location' style={{ width: '20rem' }} />
-                        <InputLines type='text' name='private' placeholder="0" title='private Notes' style={{ width: '20rem' }} />
-                        <InputLines type='text' name='public' placeholder="0" title='public Notes' style={{ width: '20rem' }} />
+                        <Input type='text' name='brand' placeholder="BMW" title='Brand' style={{ width: '20rem' }} defaultValue={data.brand} />
+                        <Input type='text' name='model' title='Model' style={{ width: '20rem' }} defaultValue={data.model} />
+                        <Input type='text' name='location' placeholder="0" title='Location' style={{ width: '20rem' }} defaultValue={data.location} />
+                        <InputLines type='text' name='private' placeholder="0" title='private Notes' style={{ width: '20rem' }} defaultValue={data.private} />
+                        <InputLines type='text' name='public' placeholder="0" title='public Notes' style={{ width: '20rem' }} defaultValue={data.public} />
 
                     </div>
                     <div className='box col'>
                         <b>Features</b>
                         <hr />
                         <div className="box row" style={{ width: '20rem' }}>
-                            <Input type='text' name='width' placeholder="eg 245" title='width' style={{ width: '6rem' }} />
-                            <Input type='text' name='aspect' placeholder="eg 70" title='aspect' style={{ width: '6rem' }} />
-                            <Input type='text' name='rim' placeholder="eg 16" title='Rim' style={{ width: '6rem' }} />
+                            <Input type='text' name='width' placeholder="eg 245" title='width' style={{ width: '6rem' }} defaultValue={data.width} />
+                            <Input type='text' name='aspect' placeholder="eg 70" title='aspect' style={{ width: '6rem' }} defaultValue={data.aspect} />
+                            <Input type='text' name='rim' placeholder="eg 16" title='Rim' style={{ width: '6rem' }} defaultValue={data.rim} />
                         </div>
                         <div className="box row" style={{ width: '20rem' }}>
-                            <Input type='number' name='speed' title='speed/load' style={{ width: '6rem' }} />
-                            <Input type='number' name='tread' title='Tread' style={{ width: '6rem' }} />
-                            <Input type='number' name='stockQty' title='stock Qty' style={{ width: '6rem' }} />
+                            <Input type='number' name='speed' title='speed/load' style={{ width: '6rem' }} defaultValue={dataDef.speed} />
+                            <Input type='number' name='tread' title='Tread' style={{ width: '6rem' }} defaultValue={dataDef.tread} />
+                            <Input type='number' name='stockQty' title='stock Qty' style={{ width: '6rem' }} defaultValue={dataDef.stockQty} />
                         </div>
                         <div className="box row" style={{ width: '20rem' }}>
-                            <Input type='text' name='cost' placeholder="0" title='Cost' style={{ width: '6rem' }} />
-                            <Input type='text' name='wholesale' placeholder="0" title='Wholesale' style={{ width: '6rem' }} />
-                            <Input type='text' name='retail' placeholder="0" title='Retail' style={{ width: '6rem' }} />
+                            <Input type='text' name='cost' placeholder="0" title='Cost' style={{ width: '6rem' }} defaultValue={dataDef.cost} />
+                            <Input type='text' name='wholesale' placeholder="0" title='Wholesale' style={{ width: '6rem' }} defaultValue={dataDef.wholesale} />
+                            <Input type='text' name='retail' placeholder="0" title='Retail' style={{ width: '6rem' }} defaultValue={dataDef.retail} />
                         </div>
-                        <Input type='text' name='category' placeholder="New , Used , ..." title='tire type' style={{ width: '20rem' }} />
+                        <Input type='text' name='category' placeholder="New , Used , ..." title='tire type' style={{ width: '20rem' }} defaultValue={dataDef.category} />
                     </div>
                     <div className='box col'>
                         <b>assets</b>
@@ -141,9 +139,13 @@ export function Form({ lang, dataDef = {} }) {
         </div>
     )
 }
-export async function getServerSideProps({ req, locale }) {
+export async function getServerSideProps({ req, query, locale }) {
     let cookies = cookie.parse(req?.headers?.cookie || '')
     let lang = LangContext(locale)
     if (!cookies?.token) return { redirect: { destination: '/auth/login?back=/admin/tires', permanent: true } }
-    else return { props: { lang: lang } }
+    else {
+        let dataDef = tires.filter(a => a.id = query.id)[0]
+        console.log(dataDef);
+        return { props: { lang: lang, dataDef } }
+    }
 } 

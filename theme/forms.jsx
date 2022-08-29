@@ -49,14 +49,11 @@ let Box = styled.div`
     height: 80px;
     padding-top: 10px;
     `
-let P = styled.p` 
-        margin: 0 0 -10px 0;
-        z-index: 1;
+let P = styled.p`  
         background-color: #fff;
         padding: 0px 15px;
         width: min-content;
-        border-radius: 10px;
-        overflow: hidden;
+        border-radius: 10px; 
         white-space: pre; 
     `
 export function Input(props) {

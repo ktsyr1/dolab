@@ -1,4 +1,5 @@
-import { Input } from "/lib";
+import { Input } from "/theme/forms";
+
 import { Link } from "/lib";
 import Head from "next/head";
 import cookie from "cookie";

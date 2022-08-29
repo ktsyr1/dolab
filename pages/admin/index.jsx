@@ -1,5 +1,4 @@
 
-import { Input } from "/lib";
 import { Link } from "/lib";
 import Head from "next/head";
 import cookie from "cookie";

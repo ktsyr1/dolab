@@ -1,6 +1,7 @@
 
 
-import { Input, Title } from "/lib";
+import { Input } from "/theme/forms";
+import { Title } from "/lib";
 import Head from "next/head";
 import cookie from "cookie";
 import { Component, useContext, useState } from "react";

@@ -8,9 +8,13 @@ export default function Nav() {
     let { locale, asPath } = useRouter()
     let lang = LangContext(locale)
     function open() {
-        document.querySelector('.menu').classList.toggle('sm-none')
-        document.querySelector('.menu').classList.toggle('md-none')
-        document.querySelector('.menu').classList.toggle('lg-none')
+        let scrollWidth = document.body.scrollWidth
+        if (scrollWidth <= 992) {
+            document.querySelector('.menu').classList.toggle('sm-none')
+            document.querySelector('.menu').classList.toggle('md-none')
+            document.querySelector('.menu').classList.toggle('lg-none')
+
+        }
         document.querySelector('.menu_admin')?.classList.toggle('none')
         document.querySelector('.menu_admin')?.classList.toggle('sm-none')
     }
@@ -25,7 +29,7 @@ export default function Nav() {
                 <Image src={'/images/logo.png'} width={54} height={40} style={{ filter: 'drop-shadow(1px 1px 1px #FFFfff99)' }} />
             </Link>
             {/* menu */}
-            {/* <Menu open={open} lang={lang} locale={locale} asPath={asPath} /> */}
+            <Menu open={open} lang={lang} locale={locale} asPath={asPath} />
             {/* search */}
             <Link href='/search' className='sm-box md-box m'  >
                 <SearchOutline color={'#00000'} title={'Search'} height="40px" width="40px" />

@@ -1,12 +1,13 @@
 
 
-import { Input, Title } from "/lib";
+import {  Title } from "/lib";
 import Head from "next/head";
 import cookie from "cookie";
 import { Component, useContext, useState } from "react";
 import Forms from "/theme/forms";
 import BrandContext from "/lib/context/brand";
 import { PencilOutline, TrashOutline } from "react-ionicons";
+import { Input } from "../../theme/forms";
 // nextjs useing routes 
 
 export default class BrandsPage extends Component {
