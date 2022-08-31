@@ -116,8 +116,8 @@ export default class Maker extends Component {
                         value={one.name} onChange={e => this.Change(e)}
                     />
                     {/* <Models /> */}
-                    {one?.models?.map((model, i) => {
-                        let { id, versions, model } = model
+                    {one?.models?.map((Model, i) => {
+                        let { id, versions, model } = Model
                         // remove item in models
                         return (
                             <div className="box row alignY " key={i} >
