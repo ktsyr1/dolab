@@ -1,146 +1,103 @@
 
 
-import {  Title } from "/lib";
+import { Input } from "/theme/forms";
 import Head from "next/head";
 import cookie from "cookie";
 import { Component, useContext, useState } from "react";
 import Forms from "/theme/forms";
 import BrandContext from "/lib/context/brand";
 import { PencilOutline, TrashOutline } from "react-ionicons";
-import { Input } from "../../theme/forms";
+import { LangContext, Title } from "/lib";
+import { Popconfirm, Table } from 'antd';
+import 'antd/dist/antd.css'
+
 // nextjs useing routes 
 
 export default class BrandsPage extends Component {
     constructor(props) {
         super(props);
+        let data = props.brands
+        let lang = LangContext(this.props.locale)
+        let _id = data.length
         this.state = {
-            data: props.brands,
-            One: null,
-            title: 'add brand',
-            Text: props.Text,
+            data,
+            one: { name: '', id: _id },
+            lang: props.Text,
+            edittype: false,
+            _id
         };
+        this.updateOne = this.updateOne.bind(this);
+        this.send = this.send.bind(this);
+        this.DeleteOne = this.DeleteOne.bind(this);
+
+    }
+    updateOne(newData) {
+        let { data, one, _id } = this.state
+        let All = data.filter(item => item.id != one.id)
+        let All_one = one
+        data = [All_one, ...All]
+        data = data.sort((a, b) => a.id - b.id)
+        this.setState({ data, one: { name: '', id: _id }, edittype: false })
+    }
+    send(e) {
+        let { data, one, _id } = this.state
+        one['id'] = _id + 1
+        document.querySelector('body [name="name"] ').value = ''
+        this.setState({ data: [one, ...data], _id: _id + 1, one: { name: '' } })
+    }
+    DeleteOne(record) {
+        let { data } = this.state
+        data = data.filter(item => item.id !== record.id)
+        this.setState({ data })
     }
     render() {
-        // let update = (newData) => this.setState({ data: newData })
-        let updateOne = (newData) => { this.setState({ One: newData }); }
-        let { Text } = this.state
-        let name = this.state?.One?.name
-        function open() {
-            ['.Formadd.forms', '.Formadd #forms']
-                .map(e => document.querySelector(e)?.classList.toggle('none'))
-        }
-        function openE() {
-            ['.FormEdit.forms', '.FormEdit #forms']
-                .map(e => document.querySelector(e)?.classList.toggle('none'))
-        }
-        return (
-            <BrandContext.Provider value={this.state}>
-                <div className="box col w-full  ">
-                    <Head>
-                        <title>{Text.brands}</title>
-                    </Head>
+        let { lang, edittype, one } = this.state
 
-                    <Title title={Text.brands} ui >
-                        <button className="btn " onClick={open}>{Text.add_brand}</button>
-                    </Title>
-                    <Forms classes='Formadd' title={Text.add_brand} send={open} close={open}  >
-                        <Input name="name" placeholder={Text.name} />
-                    </Forms>
-                    <Forms title={Text.edit_brand} send={openE} close={openE}  >
-                        <Input type="text" name="name" placeholder={Text.name} title={Text.name} defaultValue={name} />
-                    </Forms>
-                    <Table data={this.state.data} updateOne={updateOne} edit={openE} />
+        let typeSend = edittype
+            ? { text: lang.update, submit: this.updateOne, }
+            : { text: lang.add, submit: this.send, }
+        return (
+            <div className="box col w-full  ">
+                <Head>
+                    <title>{lang.brands}</title>
+                </Head>
+                <Title title={lang.brands} ui />
+                {/* Forms */}
+                <div className='box row alignY-end alignY-start ui' >
+                    <Input type="text" name="name" placeholder={lang.name} title={lang.name}
+                        onChange={e => this.setState({ one: { ...this.state.one, name: e.target.value } })}
+                        value={one && one.name}
+                    />
+                    <button className="btn " style={{ marginBottom: '12px' }} onClick={typeSend.submit} >{typeSend.text}</button>
                 </div>
-            </BrandContext.Provider >
-        );
+
+                <Table
+                    dataSource={this.state.data}
+                    columns={[
+                        { title: lang.name, dataIndex: 'name', editable: true },
+                        {
+                            title: '', dataIndex: '',
+                            render: (_, record) => this.state.data.length >= 1 ? (
+                                <div className="box row" >
+                                    <div style={{ margin: '0 10px' }} onClick={() => this.setState({ one: record, edittype: true })}>
+                                        <PencilOutline title={'Delete'} color={'#00000'} height="25px" width="25px" />
+                                    </div>
+                                    <Popconfirm title={lang.sure_to_delete} onConfirm={() => this.DeleteOne(record)}>
+                                        <TrashOutline title={'Delete'} color={'#00000'} height="25px" width="25px" />
+                                    </Popconfirm>
+                                </div>
+                            ) : null
+                        },
+                    ]}
+                    pagination={false}
+                    bordered
+                />
+            </div>
+        )
     }
 }
 BrandsPage.contextType = BrandContext;
 
-
-export function List({ data, classNames, onDelete, onEdit }) {
-    let { name } = data
-    return (
-        <>
-            <div className={"box row w-full alignY alignX-full " + classNames}>
-                <p className="w-10 p "  >{name}</p>
-                <div className="box rew ">
-                    {onDelete ?
-                        <div className="m" onClick={onDelete}>
-                            <TrashOutline width={'20px'} height={'20px'} />
-                        </div>
-                        : ""}
-                    {onEdit ?
-                        <div className="m" onClick={onEdit}>
-                            <PencilOutline width={'20px'} height={'20px'} />
-                        </div>
-                        : "-"}
-                </div>
-            </div>
-            <hr />
-        </>
-    )
-}
-function Table({ updateOne, open, edit }) {
-    let Context = useContext(BrandContext);
-    let [_data, setData] = useState(Context.data);
-    let [One, setOne] = useState(null)
-    if (_data?.length > 0) {
-        // onDelete, onEdit 
-        let setDelete = () => document.querySelector('.VerifyDelete')?.classList.toggle('none')
-        function onDelete() {
-            // delete id from data
-            let newData = _data.filter(item => item.id !== One.id);
-            setData(newData);
-            Context.setdata = newData;
-            setDelete()
-        }
-        return (
-            <div className="box col w-full ui  ">
-                {One ? <VerifyDelete data={One} open={setDelete} Delete={onDelete} /> : ''}
-                <List data={{ name: Context.Text.name }} classNames='color-ui' />
-                {_data.map(a => {
-
-                    let onEdit = () => {
-                        updateOne(a)
-                        setTimeout(() => edit(), 500)
-                    }
-                    let Delete = () => {
-                        if (One === null) {
-                            setOne(a);
-                            setTimeout(setDelete, 500)
-                        }
-                        setOne(a);
-                        setDelete()
-                    }
-                    return <List data={a} key={a.id} onDelete={Delete} onEdit={onEdit} />
-                })}
-            </div >
-        )
-    } else {
-        return <div className="box alignX ui"> not data </div>
-    }
-}
-function VerifyDelete({ data, open, Delete }) {
-    let { Text } = useContext(BrandContext)
-    return (
-        <div className={'pup none forms m-auto box alignX alignY VerifyDelete '} style={{
-            width: '100%', height: '100%', right: 0, top: 0
-        }}>
-            <div style={{ width: '100%', height: '100%', backdropFilter: 'blur(10px)' }} />
-
-            <div id="forms" className=" box col ui pup m-auto" >
-                <p className="m-auto p-5" >{Text?.delete_for_brand} <b>{data.name}</b> </p>
-                <div className="box row">
-                    <button className="btn w-full m diseble" onClick={open}>{Text?.close}</button>
-                    <button className="btn w-full m" onClick={Delete}>{Text?.delete}</button>
-
-                </div>
-            </div>
-
-        </div>
-    )
-}
 export async function getServerSideProps({ req, locale }) {
     let cookies = cookie.parse(req?.headers?.cookie || '')
     let Text = await import('/lib/lang.json')
@@ -158,5 +115,4 @@ let brands = [
     { id: 8, name: 'Koenigsegg' },
     { id: 9, name: 'Aston Martin' },
     { id: 10, name: 'Jaguar' },
-
 ] 

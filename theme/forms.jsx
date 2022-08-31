@@ -49,7 +49,7 @@ let Box = styled.div`
     height: 80px;
     padding-top: 10px;
     `
-let P = styled.p`  
+let Label = styled.label`  
         background-color: #fff;
         padding: 0px 15px;
         width: min-content;
@@ -62,7 +62,7 @@ export function Input(props) {
     let title = props?.title ? props.title : lang[props.name]
     return (
         <Box className='box col m-2'>
-            <P>{title}</P>
+            <Label htmlFor={props?.name}>{title}</Label>
             <input type={props.type ? props.type : 'text'} {...props} />
         </Box>
     )

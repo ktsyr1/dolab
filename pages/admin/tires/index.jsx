@@ -11,17 +11,11 @@ import { useRouter } from "next/router";
 import { PencilOutline, TrashOutline } from "react-ionicons";
 import 'antd/dist/antd.css'
 
-export default function Tires({ tires, Text }) {
+export default function Tires({ tires, Text }) { 
     let [data, setData] = useState(tires)
     let { locale, asPath } = useRouter()
     let lang = LangContext(locale)
-    // useEffect(() => {
-    //     let res = localStorage?.getItem('tires')
-    //     // res to json
-    //     let tires = res ? JSON.parse(res) : {}
-    //     setData(tires)
-    //     setTimeout(() => '', 5000);
-    // })
+    
     function DeleteOne() {
         return
     }

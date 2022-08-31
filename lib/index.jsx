@@ -32,3 +32,10 @@ export function Title(props) {
 export function LangContext(locale = 'en') {
     return lang_data[locale]
 }
+export function NewID(Array) {
+    let All_ids = Array.map(item => item.id) 
+    const max = All_ids.reduce((a, b) => Math.max(a, b), -Infinity)
+    console.log(All_ids);
+    console.log(max);
+    return max +1
+}
