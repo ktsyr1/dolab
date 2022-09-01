@@ -7,6 +7,31 @@ import Forms from "/theme/forms";
 import { useEffect, useState } from "react";
 import { LangContext } from "/lib";
 import Image from "next/image";
+import { Camera, Grid, ImageSharp, ListOutline, RemoveCircleOutline } from "react-ionicons";
+import styled from "styled-components";
+let CameraBox = {
+    display: 'flex',
+    zIndex: 1,
+    backgroundColor: '#fff',
+    width: 'min-content',
+    padding: '5px',
+    border: '1px solid #ff2b2b',
+    borderRadius: '10px',
+    width: 'auto',
+    alignContent: 'center',
+    alignItems: 'center',
+    margin: '10px 0'
+}
+let Gallary = styled.div`
+    width: 20rem; 
+    display: flex; 
+    flex-direction: row; 
+    flex-wrap: nowrap; 
+    align-content: center; 
+    align-items: center; 
+    justify-content: flex-start;
+    overflow-x: scroll;
+`
 export default function Tires({ lang, dataDef = {} }) {
     // images  
     return (
@@ -21,7 +46,7 @@ export default function Tires({ lang, dataDef = {} }) {
 }
 export function Form({ lang, dataDef = {} }) {
     // images
-    let [icon, setIcon] = useState(['/_next/image?url=%2Fimages%2Flogo.png&w=64&q=75'])
+    let [icon, setIcon] = useState([])
     let [images, setImages] = useState([]);
     // data
     let [data, setData] = useState(dataDef);
@@ -111,26 +136,33 @@ export function Form({ lang, dataDef = {} }) {
                     <div className='box col'>
                         <b>assets</b>
                         <hr />
-                        <div className='box col alignX '>
+                        <div className='box col alignX none'>
 
                             <Input type='file' name='icon' title='icon tires' style={{ width: '20rem' }}
                                 //  - formats png, jpg, gif, svg
                                 accept="image/png, image/jpeg, image/gif"
                             />
-                            <Image src={icon[0]} width='200px' height='200px' loading="lazy" alt="icon tires" />
-                        </div>
-                        <hr />
-                        <div className='box col alignX '>
                             <Input type='file' name='images' title='photos tires' style={{ width: '20rem' }} accept="image/png, image/jpeg, " multiple />
-                            <div className='box row scroll alignX ' style={{ width: '20rem' }}>
+                        </div>
+                        <div className='box col alignX ' style={{ minHeight: '222px', width: '300px' }}>
+                            <div style={CameraBox} className='ui' onClick={() => document.querySelector('body [name="icon"]').click()} >
+                                <Camera title={'Add icon'} color={'#00000'} height="40px" width="40px" />
+                                <p className='p-1'> icon tires </p>
+                            </div>
 
+                            {icon.length > 0 ? <Image src={icon[0]} width='200px' height='200px' loading="lazy" alt="icon tires" /> : null}
+
+                            <div style={CameraBox} onClick={() => document.querySelector('body [name="images"]').click()}>
+                                <ImageSharp title={'Add images'} color={'#00000'} height="40px" width="40px" />
+                                <p className='p-1'> icon tires <span style={{ color: 'rad' }}>{data?.images?.length}</span> </p>
+                            </div>
+                            <Gallary >
                                 {data?.images?.map(file => {
                                     return (
-                                        <Image key={file} src={file} width='200px' height='200px' loading="lazy" alt={file} />
+                                        <img key={file} src={file} width='200px' height='200px' loading="lazy" alt={file} />
                                     )
-
                                 })}
-                            </div>
+                            </Gallary>
                         </div>
                     </div>
                 </div>

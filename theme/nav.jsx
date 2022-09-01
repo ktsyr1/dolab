@@ -9,15 +9,21 @@ export default function Nav() {
     let lang = LangContext(locale)
     function open() {
         let scrollWidth = document.body.scrollWidth
+        let QT = (q, c) => document.querySelector(q).classList.toggle(c)
         if (scrollWidth <= 992) {
-            document.querySelector('.menu').classList.toggle('sm-none')
-            document.querySelector('.menu').classList.toggle('md-none')
-            document.querySelector('.menu').classList.toggle('lg-none')
-
+            QT('.menu', 'sm-none')
+            QT('.menu', 'md-none')
+            QT('.menu', 'lg-none')
         }
-        document.querySelector('.menu_admin')?.classList.toggle('none')
-        document.querySelector('.menu_admin')?.classList.toggle('sm-none')
+        QT('.menu_admin', 'none')
+        QT('.menu_admin', 'sm-none')
     }
+
+    let data = [
+        { content: lang?.home, href: '/' },
+        { content: lang?.product, href: '/#' },
+        { content: lang?.about, href: '/?' }
+    ]
     return (
         <nav className="R-m alignX-full alignY box pup sh ">
             {/* btn menu */}
@@ -29,7 +35,22 @@ export default function Nav() {
                 <Image src={'/images/logo.png'} width={54} height={40} style={{ filter: 'drop-shadow(1px 1px 1px #FFFfff99)' }} />
             </Link>
             {/* menu */}
-            <Menu open={open} lang={lang} locale={locale} asPath={asPath} />
+            <div className=" menu box row sm-pup sm-col sm-sh sm-none md-pup md-col md-sh md-none lg-none lg-pup lg-col lg-sh alignY alignY-full right-0" >
+                <div className="box sm-col sm-sh md-col md-sh sm-w-full md-w-full lg-col lg-sh lg-w-full alignY" onClick={open}>
+                    {data.map(a => {
+                        let { href, content, className } = a
+                        return (
+                            <Link href={href} key={href} className={" p-4 sm-w-full  md-w-full  lg-w-full " + (className ? className : '')} style={a?.style}  >
+                                <b> {content} </b>
+                            </Link>
+                        )
+                    })}
+                    <Languages asPath={asPath} locale={locale} />
+                </div>
+                <div className="box row sm-col md-col lg-col sm-w-full md-w-full lg-w-full" onClick={open} >
+                    {/* <AuthItems lang={lang} locale={locale} asPath={asPath} /> */}
+                </div>
+            </div >
             {/* search */}
             <Link href='/search' className='sm-box md-box m'  >
                 <SearchOutline color={'#00000'} title={'Search'} height="40px" width="40px" />
@@ -37,32 +58,7 @@ export default function Nav() {
         </nav >
     )
 }
-
-function Menu({ open, locale, asPath, lang }) {
-    let data = [
-        { content: lang?.home, href: '/' },
-        { content: lang?.product, href: '/#' },
-        { content: lang?.about, href: '/?' }
-    ]
-    return (
-        <div className=" menu box row sm-pup sm-col sm-sh sm-none md-pup md-col md-sh md-none lg-none lg-pup lg-col lg-sh alignY alignY-full right-0" >
-            <div className="box sm-col sm-sh md-col md-sh sm-w-full md-w-full lg-col lg-sh lg-w-full alignY" onClick={open}>
-                {data.map(a => {
-                    let { href, content, className } = a
-                    return (
-                        <Link href={href} key={href} className={" p-4 sm-w-full  md-w-full  lg-w-full " + (className ? className : '')} style={a?.style}  >
-                            <b> {content} </b>
-                        </Link>
-                    )
-                })}
-                <Languages asPath={asPath} locale={locale} />
-            </div>
-            <div className="box row sm-col md-col lg-col sm-w-full md-w-full lg-w-full" onClick={open} >
-                <AuthItems lang={lang} locale={locale} asPath={asPath} />
-            </div>
-        </div >
-    )
-}
+ 
 function Languages({ asPath, locale }) {
     if (locale !== 'en') {
         let lang = 'en'

@@ -94,7 +94,7 @@ export default class Maker extends Component {
 
             dataOne[name] = name === 'versions' ? value.split(',') : value; 
             models = [...dataOthers, dataOne]
-            models = models.sort((a, b) => a.id - b.id)
+            models = models.sort((a, b) => a.id + b.id)
             this.setState({ one: { ...this.state.one, models } })
         }
         // console.log(this.state.one);

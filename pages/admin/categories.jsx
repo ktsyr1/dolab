@@ -36,14 +36,17 @@ export default class BrandsPage extends Component {
         let All = data.filter(item => item.id != one.id)
         let All_one = one
         data = [All_one, ...All]
-        data = data.sort((a, b) => a.id - b.id)
+        data = data.sort((a, b) => a.id + b.id)
         this.setState({ data, one: { name: '', id: _id }, edittype: false })
     }
     send(e) {
         let { data, one, _id } = this.state
         one['id'] = _id + 1
         document.querySelector('body [name="name"] ').value = ''
-        this.setState({ data: [one, ...data], _id: _id + 1, one: { name: '' } })
+        setTimeout(() => {
+            this.setState({ data: [one, ...data], _id: _id + 1, one: { name: '' } })
+        }, 200)
+
     }
     DeleteOne(record) {
         let { data } = this.state

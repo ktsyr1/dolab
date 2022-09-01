@@ -71,7 +71,7 @@ export function Input(props) {
 export function InputLines(props) {
     return (
         <Box className='box col m-2'>
-            <P>{props.title}</P>
+            <Label>{props.title}</Label>
             <textarea type={props.type ? props.type : 'text'} {...props} />
         </Box>
     )
